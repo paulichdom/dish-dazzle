@@ -1,10 +1,7 @@
-import './App.css'
-import styled from 'styled-components'
+import styled from "styled-components";
 
 function App() {
-  return (
-    <Wrapper>Hi there!</Wrapper>
-  )
+  return <Wrapper>TEST</Wrapper>;
 }
 
 export default App;
@@ -14,5 +11,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   padding: 100px;
 `;
