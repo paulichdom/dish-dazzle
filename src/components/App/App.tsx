@@ -1,16 +1,26 @@
-import styled from "styled-components";
+import { Fragment } from "react";
+import Header from "../Header";
+import PageLayout from "../PageLayout";
+import Footer from "../Footer";
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+    body {
+      font-family: 'Lora', serif;
+    }
+`;
 
 function App() {
-  return <Wrapper>TEST</Wrapper>;
+  return (
+    <Fragment>
+      <GlobalStyle />
+      <Header />
+      <PageLayout>
+        <div>TEST</div>
+      </PageLayout>
+      <Footer />
+    </Fragment>
+  );
 }
 
 export default App;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  padding: 100px;
-`;
