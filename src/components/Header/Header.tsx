@@ -3,22 +3,22 @@ import { Row } from '../Layout';
 
 const Header = () => {
   const isLoggedIn = false;
-  const onLogout = () => {}
+  const onLogout = () => { }
   return (
     <HeaderContainer>
       <Navbar>
-      <Logo>Dish Dazzle</Logo>
-      <LinksContainer>
-        <NavLink href="/">Home</NavLink>
-        <NavLink href="/recipes">Recipes</NavLink>
-        <NavLink href="/about">About</NavLink>
-      </LinksContainer>
+        <Logo>Dish Dazzle</Logo>
+        <LinksContainer>
+          <NavLink href="/">Home</NavLink>
+          <NavLink href="/recipes">Recipes</NavLink>
+          <NavLink href="/about">About</NavLink>
+        </LinksContainer>
       </Navbar>
-        {isLoggedIn ? (
-          <LogoutButton onClick={onLogout}>Logout</LogoutButton>
-        ) : (
-          <LoginButton>Login</LoginButton>
-        )}
+      {isLoggedIn ? (
+        <LogoutButton onClick={onLogout}>Logout</LogoutButton>
+      ) : (
+        <LoginButton>Login</LoginButton>
+      )}
     </HeaderContainer>
   );
 };
@@ -37,7 +37,7 @@ const HeaderContainer = styled.header`
 const Logo = styled.div`
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: #4285f4; /* Google Blue Color */
 `;
 
 const Navbar = styled.nav`
@@ -53,7 +53,8 @@ const LinksContainer = styled(Row)`
 const NavLink = styled.a`
   color: #333;
   text-decoration: none;
-  font-size: 16px;
+  text-transform: uppercase;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
 

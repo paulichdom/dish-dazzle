@@ -3,6 +3,8 @@ import Header from "../Header";
 import PageLayout from "../PageLayout";
 import Footer from "../Footer";
 import { createGlobalStyle } from "styled-components";
+import { recipes } from "../../mocks/recipes";
+import Recipe from "../Recipe";
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -16,7 +18,9 @@ function App() {
       <GlobalStyle />
       <Header />
       <PageLayout>
-        <div>TEST</div>
+        {recipes.map((recipe, index) => (
+          <Recipe key={index} recipe={recipe} />
+        ))}
       </PageLayout>
       <Footer />
     </Fragment>
