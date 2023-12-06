@@ -4,7 +4,7 @@ import PageLayout from "../PageLayout";
 import Footer from "../Footer";
 import { createGlobalStyle } from "styled-components";
 import { recipes } from "../../mocks/recipes";
-import Recipe from "../Recipe";
+import RecipeGrid from "../RecipeGrid";
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -12,19 +12,15 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-function App() {
+export default function App() {
   return (
     <Fragment>
       <GlobalStyle />
       <Header />
       <PageLayout>
-        {recipes.map((recipe, index) => (
-          <Recipe key={index} recipe={recipe} />
-        ))}
+        <RecipeGrid recipes={recipes} />
       </PageLayout>
       <Footer />
     </Fragment>
   );
 }
-
-export default App;

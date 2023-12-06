@@ -19,6 +19,7 @@ const Header = () => {
       ) : (
         <LoginButton>Login</LoginButton>
       )}
+      <Curtain />
     </HeaderContainer>
   );
 };
@@ -26,12 +27,17 @@ const Header = () => {
 export default Header;
 
 const HeaderContainer = styled.header`
+  width: 100%;
   background: linear-gradient(0deg, #f5f5f5, #e0e0e0);
   color: #fff;
-  padding: 20px 80px;
+  padding: 48px 80px 20px;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  
+  top: -28px;
+  position: sticky;
+  z-index: 2;
 `;
 
 const Logo = styled.div`
@@ -75,4 +81,23 @@ const LoginButton = styled.button`
 const LogoutButton = styled(LoginButton)`
   background-color: #f00;
   color: #fff;
+`;
+
+const Curtain = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: -31px;
+  width: 100%;
+  height: 32px;
+
+  &:before {
+    display: block;
+    width: 100%;
+    height: 32px;
+    background: linear-gradient(
+      #f5f5f5,
+      rgba(0, 0, 0, 0) 90%
+    );
+    content: '';
+  }
 `;

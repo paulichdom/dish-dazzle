@@ -1,11 +1,18 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
 
-function PageLayout({ children }: { children: ReactNode }) {
-  return <Layout>{children}</Layout>;
+export default function PageLayout({ children }: { children: ReactNode }) {
+  return (
+    <MainWrapper>
+      <Layout>{children}</Layout>
+    </MainWrapper>
+  );
 }
 
-export default PageLayout;
+const MainWrapper = styled.div`
+  padding: 64px 0px 96px;
+  min-height: 100vh;
+`;
 
 const Layout = styled.main`
   display: grid;
