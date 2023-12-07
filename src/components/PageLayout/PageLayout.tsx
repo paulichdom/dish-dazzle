@@ -1,11 +1,17 @@
-import { ReactNode } from "react";
+import { Fragment, ReactNode } from "react";
 import styled from "styled-components";
+import Header from "../Header";
+import Footer from "../Footer";
 
 export default function PageLayout({ children }: { children: ReactNode }) {
   return (
-    <MainWrapper>
-      <Layout>{children}</Layout>
-    </MainWrapper>
+    <Fragment>
+      <Header />
+      <MainWrapper>
+        <Layout>{children}</Layout>
+      </MainWrapper>
+      <Footer />
+    </Fragment>
   );
 }
 
@@ -18,7 +24,7 @@ const Layout = styled.main`
   display: grid;
   grid-template-columns: 1fr min(1100px) 1fr;
   grid-column-gap: 32px;
-  grid-row-gap: 32;
+  grid-row-gap: 32px;
 
   & > * {
     grid-column: 2;

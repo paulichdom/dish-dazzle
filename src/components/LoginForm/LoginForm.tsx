@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useAuth } from "../../auth/AuthContext";
 import { FormEvent, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -36,6 +37,13 @@ export default function LoginForm() {
           />
         </Label>
         <LoginButton type="submit">Log In</LoginButton>
+        <SignUpLinkContainer>
+          <SignUpText>Don't have an account?
+            <SignUpLink to='/register'>
+              Join now
+            </SignUpLink>
+          </SignUpText>
+        </SignUpLinkContainer>
       </Form>
     </Container>
   );
@@ -109,4 +117,18 @@ const LoginButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const SignUpLinkContainer = styled.div`
+  padding: 16px 0px 0px;
+`;
+
+const SignUpText = styled.span`
+font-size: 14px;
+`;
+
+const SignUpLink = styled(Link)`
+  font-size: 14px;
+  padding-left: 4px;
+  color: inherit;
 `;

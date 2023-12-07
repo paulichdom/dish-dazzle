@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useAuth } from "../../auth/AuthContext";
 import { FormEvent } from "react";
 import { CheckCircle, Circle } from "react-feather";
+import { Link } from "react-router-dom";
 
 export default function SignupForm() {
   const initialErrors = [
@@ -10,7 +11,7 @@ export default function SignupForm() {
     { message: "One uppercase letter.", isValid: false },
     { message: "One number.", isValid: false },
     { message: "One special character.", isValid: false },
-  ]
+  ];
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailValid, setEmailValid] = useState(false);
@@ -20,7 +21,7 @@ export default function SignupForm() {
 
   const validateEmail = (value: string) => {
     const isValid = value.includes("@");
-    console.log({ emailValid })
+    console.log({ emailValid });
     setEmailValid(isValid);
     return isValid;
   };
@@ -111,7 +112,15 @@ export default function SignupForm() {
             ))}
           </ErrorList>
         </Label>
-        <SignupButton type="submit" disabled={!passwordValid}>Sign Up</SignupButton>
+        <SignupButton type="submit" disabled={!passwordValid}>
+          Sign Up
+        </SignupButton>
+        <LoginLinkContainer>
+          <LoginText>
+            Have an account?
+            <LoginLink to="/login">Log in</LoginLink>
+          </LoginText>
+        </LoginLinkContainer>
       </Form>
     </Container>
   );
@@ -191,6 +200,11 @@ const SignupButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+
+  &:disabled {
+    background: #D3D3D3;
+    cursor: not-allowed;
+  }
 `;
 
 const ErrorList = styled.ul`
@@ -209,4 +223,18 @@ const ListItem = styled.li`
 const ListItemText = styled.span`
   color: #333;
   padding-left: 4px;
+`;
+
+const LoginLinkContainer = styled.div`
+  padding: 16px 0px 0px;
+`;
+
+const LoginText = styled.span`
+  font-size: 14px;
+`;
+
+const LoginLink = styled(Link)`
+  font-size: 14px;
+  padding-left: 4px;
+  color: inherit;
 `;

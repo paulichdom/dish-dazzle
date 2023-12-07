@@ -14,10 +14,9 @@ export default function RecipeGrid(props: RecipeGridProps) {
   return (
     <GridLayout>
       {recipes.map(({ id, title, tags }, index) => (
-        <Link to={`/recipes/${id}`}>
+        <Link key={index} to={`/recipes/${id}`}>
           <RecipeCard
             recipeId={id}
-            key={index}
             imageUrl={faker.image.urlLoremFlickr({
               category: "food",
             })}

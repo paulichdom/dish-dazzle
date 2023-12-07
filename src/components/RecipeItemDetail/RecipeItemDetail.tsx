@@ -3,14 +3,15 @@ import { Recipe } from "../../mocks/recipes";
 
 export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
   const { title, dateCreated, instructions, tags } = recipe;
+
   const imageUrl = "https://source.unsplash.com/random";
+
   const formattedDate = new Date(dateCreated).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
-  // Placeholder Lorem Ipsum text for the description
   const description =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 

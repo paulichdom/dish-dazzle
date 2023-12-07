@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function ErrorPage() {
+export default function Error() {
   return (
     <ErrorContainer>
       <h1>Oops!</h1>
