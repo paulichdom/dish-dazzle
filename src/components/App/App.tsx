@@ -1,10 +1,13 @@
-import { Fragment } from "react";
 import Header from "../Header";
 import PageLayout from "../PageLayout";
 import Footer from "../Footer";
 import { createGlobalStyle } from "styled-components";
-import { recipes } from "../../mocks/recipes";
-import RecipeGrid from "../RecipeGrid";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import RegisterForm from "../RegisterForm";
+import ErrorPage from "../ErrorPage";
+import LoginForm from "../LoginForm";
+import Recipes from "../../pages/Recipes/Recipes";
+import RecipeDetails from "../../pages/RecipeDetails";
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -14,13 +17,19 @@ const GlobalStyle = createGlobalStyle`
 
 export default function App() {
   return (
-    <Fragment>
+    <BrowserRouter>
       <GlobalStyle />
       <Header />
       <PageLayout>
-        <RecipeGrid recipes={recipes} />
+        <Routes>
+          <Route path='/' element={<LoginForm />} />
+          <Route path='/recipes' element={<Recipes />} />
+          <Route path='/recipes/:id' element={<RecipeDetails />} />
+          <Route path='login' element={<RegisterForm />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
       </PageLayout>
       <Footer />
-    </Fragment>
+    </BrowserRouter>
   );
 }

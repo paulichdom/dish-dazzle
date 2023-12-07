@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 type RecipeCardProps = {
+  recipeId: string;
   imageUrl: string;
   recipeName: string;
   tags: string[];
@@ -9,7 +10,7 @@ type RecipeCardProps = {
 export default function RecipeCard({
   imageUrl,
   recipeName,
-  tags,
+  tags
 }: RecipeCardProps) {
   return (
     <CardContainer>

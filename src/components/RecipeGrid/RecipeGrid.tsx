@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Recipe } from "../../mocks/recipes";
 import RecipeCard from "../RecipeCard";
 import { faker } from "@faker-js/faker";
+import { Link } from "react-router-dom";
 
 type RecipeGridProps = {
   recipes: Recipe[];
@@ -12,15 +13,18 @@ export default function RecipeGrid(props: RecipeGridProps) {
   console.log({ recipes });
   return (
     <GridLayout>
-      {recipes.map(({ title, tags }, index) => (
-        <RecipeCard
-          key={index}
-          imageUrl={faker.image.urlLoremFlickr({
-            category: "food",
-          })}
-          recipeName={title}
-          tags={tags}
-        />
+      {recipes.map(({ id, title, tags }, index) => (
+        <Link to={`/recipes/${id}`}>
+          <RecipeCard
+            recipeId={id}
+            key={index}
+            imageUrl={faker.image.urlLoremFlickr({
+              category: "food",
+            })}
+            recipeName={title}
+            tags={tags}
+          />
+        </Link>
       ))}
     </GridLayout>
   );

@@ -1,4 +1,5 @@
 export type Recipe = {
+    id: string;
     title: string;
     dateCreated: string;
     authorId: string;
@@ -9,6 +10,7 @@ export type Recipe = {
 
 export const recipes = [
     {
+        id: "1",
         title: "Grilled Beef Steak and Asparagus",
         dateCreated: "2023-01-01",
         authorId: "yDk0b0ZOc3SfSzSdErsaBjkLm813",
@@ -16,6 +18,7 @@ export const recipes = [
         tags: ["Beef", "Steak", "Asparagus", "Grill"],
     },
     {
+        id: "2",
         title: "Roasted Chicken with Lemon and Rosemary",
         dateCreated: "2023-01-02",
         authorId: "zAe1x1YOp2XcWwWqQdEfRbNn742",
@@ -23,6 +26,7 @@ export const recipes = [
         tags: ["Chicken", "Roast", "Lemon", "Rosemary"],
     },
     {
+        id: "3",
         title: "Vegetarian Pasta Primavera",
         dateCreated: "2023-01-03",
         authorId: "xYz9aBc8Mn0pQqRwZvXcHnLk543",
@@ -30,6 +34,7 @@ export const recipes = [
         tags: ["Vegetarian", "Pasta", "Primavera", "Vegetables"],
     },
     {
+        id: "4",
         title: "Grilled Salmon with Dill Sauce",
         dateCreated: "2023-01-04",
         authorId: "aBc1dEf2Gh3Ij4Kl5Mn6Op7Qr8",
@@ -37,6 +42,7 @@ export const recipes = [
         tags: ["Salmon", "Grill", "Dill"],
     },
     {
+        id: "5",
         title: "Mushroom Risotto",
         dateCreated: "2023-01-05",
         authorId: "bCd2eFg3Hi4Jk5Lm6Np7Qr8Ss9",
@@ -44,6 +50,7 @@ export const recipes = [
         tags: ["Mushroom", "Risotto", "Italian"],
     },
     {
+        id: "6",
         title: "Crispy Baked Potato Wedges",
         dateCreated: "2023-01-06",
         authorId: "cDe3fGh4Ij5Kl6Mn7Op8Qr9Ss0",
@@ -51,6 +58,7 @@ export const recipes = [
         tags: ["Potato", "Baked", "Snack"],
     },
     {
+        id: "7",
         title: "Shrimp Scampi Pasta",
         dateCreated: "2023-01-07",
         authorId: "dEf4Gh5Ij6Kl7Mn8Op9Qr0Ss1",
@@ -58,6 +66,7 @@ export const recipes = [
         tags: ["Shrimp", "Scampi", "Pasta"],
     },
     {
+        id: "8",
         title: "Barbecue Pulled Pork Sandwiches",
         dateCreated: "2023-01-08",
         authorId: "eFg5hIj6Kl7Mn8Op9Qr0Ss1Tt2",
@@ -65,6 +74,7 @@ export const recipes = [
         tags: ["Pulled Pork", "Barbecue", "Sandwich"],
     },
     {
+        id: "9",
         title: "Caprese Salad with Balsamic Glaze",
         dateCreated: "2023-01-09",
         authorId: "fGh6Ij7Kl8Mn9Op0Qr1Ss2Tt3",
@@ -72,6 +82,7 @@ export const recipes = [
         tags: ["Caprese", "Salad", "Italian"],
     },
     {
+        id: "10",
         title: "Teriyaki Glazed Chicken Skewers",
         dateCreated: "2023-01-10",
         authorId: "gHj7Kl8Mn9Op0Qr1Ss2Tt3Uu4",
@@ -79,6 +90,7 @@ export const recipes = [
         tags: ["Chicken", "Teriyaki", "Skewers"],
     },
     {
+        id: "11",
         title: "Spaghetti Carbonara",
         dateCreated: "2023-01-11",
         authorId: "hIj8Kl9Mn0Op1Qr2Ss3Tt4Uu5",
@@ -86,6 +98,7 @@ export const recipes = [
         tags: ["Spaghetti", "Carbonara", "Italian"],
     },
     {
+        id: "12",
         title: "Honey Glazed Carrots",
         dateCreated: "2023-01-12",
         authorId: "iJk9Lm0Op1Qr2Ss3Tt4Uu5Vv6",
@@ -93,6 +106,7 @@ export const recipes = [
         tags: ["Carrots", "Honey Glazed", "Side Dish"],
     },
     {
+        id: "13",
         title: "Cajun Blackened Catfish",
         dateCreated: "2023-01-13",
         authorId: "jKl0Mn1Op2Qr3Ss4Tt5Uu6Vv7",
@@ -100,6 +114,7 @@ export const recipes = [
         tags: ["Catfish", "Cajun", "Seafood"],
     },
     {
+        id: "14",
         title: "Greek Salad with Tzatziki Dressing",
         dateCreated: "2023-01-14",
         authorId: "kLm1Op2Qr3Ss4Tt5Uu6Vv7Ww8",
@@ -107,6 +122,7 @@ export const recipes = [
         tags: ["Greek Salad", "Tzatziki", "Vegetarian"],
     },
     {
+        id: "15",
         title: "Stuffed Bell Peppers with Quinoa",
         dateCreated: "2023-01-15",
         authorId: "mNn2Op3Qr4Ss5Tt6Uu7Vv8Ww9",
@@ -114,6 +130,7 @@ export const recipes = [
         tags: ["Stuffed Peppers", "Quinoa", "Vegetarian"],
     },
     {
+        id: "16",
         title: "Maple Glazed Bacon-Wrapped Brussels Sprouts",
         dateCreated: "2023-01-16",
         authorId: "nOp3Qr4Ss5Tt6Uu7Vv8Ww9Xx0",
@@ -121,6 +138,7 @@ export const recipes = [
         tags: ["Brussels Sprouts", "Bacon-Wrapped", "Maple Glazed"],
     },
     {
+        id: "17",
         title: "Lemon Blueberry Cheesecake",
         dateCreated: "2023-01-17",
         authorId: "oP4Qr5Ss6Tt7Uu8Vv9Ww0Xx1Yy2",
@@ -128,6 +146,7 @@ export const recipes = [
         tags: ["Cheesecake", "Lemon", "Blueberry"],
     },
     {
+        id: "18",
         title: "Tomato Basil Bruschetta",
         dateCreated: "2023-01-18",
         authorId: "pQr5Ss6Tt7Uu8Vv9Ww0Xx1Yy2Zz3",
@@ -135,6 +154,7 @@ export const recipes = [
         tags: ["Bruschetta", "Tomato", "Basil"],
     },
     {
+        id: "19",
         title: "Pesto Shrimp Linguine",
         dateCreated: "2023-01-19",
         authorId: "qSs6Tt7Uu8Vv9Ww0Xx1Yy2Zz3Aa4",
@@ -142,6 +162,7 @@ export const recipes = [
         tags: ["Shrimp", "Pesto", "Linguine"],
     },
     {
+        id: "20",
         title: "Teriyaki Veggie Stir-Fry",
         dateCreated: "2023-01-20",
         authorId: "sTt7Uu8Vv9Ww0Xx1Yy2Zz3Aa4Bb5",

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Recipe } from "../Recipe";
+import { Recipe } from "../../mocks/recipes";
 
-const RecipeDetailsPage = ({ recipe }: { recipe: Recipe }) => {
+export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
   const { title, dateCreated, instructions, tags } = recipe;
   const imageUrl = "https://source.unsplash.com/random";
   const formattedDate = new Date(dateCreated).toLocaleDateString("en-US", {
@@ -47,7 +47,7 @@ const RecipeDetailsPage = ({ recipe }: { recipe: Recipe }) => {
       </CTAContainer>
     </Container>
   );
-};
+}
 
 const Container = styled.div`
   display: flex;
@@ -118,8 +118,7 @@ const DeleteButton = styled.button`
   cursor: pointer;
 `;
 
-const TagsContainer = styled.div`
-`;
+const TagsContainer = styled.div``;
 
 const TagsLabel = styled.span`
   font-weight: bold;
@@ -136,12 +135,9 @@ const Tag = styled.span`
   border-radius: 4px;
 `;
 
-const InstructionsContainer = styled.div`
-`;
+const InstructionsContainer = styled.div``;
 
 const InstructionsLabel = styled.span`
   font-weight: bold;
   margin-right: 8px;
 `;
-
-export default RecipeDetailsPage;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Row } from '../Layout';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const isLoggedIn = false;
@@ -9,9 +10,9 @@ const Header = () => {
       <Navbar>
         <Logo>Dish Dazzle</Logo>
         <LinksContainer>
-          <NavLink href="/">Home</NavLink>
-          <NavLink href="/recipes">Recipes</NavLink>
-          <NavLink href="/about">About</NavLink>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/recipes">Recipes</NavLink>
+          <NavLink to="/about">About</NavLink>
         </LinksContainer>
       </Navbar>
       {isLoggedIn ? (
@@ -56,7 +57,7 @@ const LinksContainer = styled(Row)`
   gap: 20px;
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   color: #333;
   text-decoration: none;
   text-transform: uppercase;
