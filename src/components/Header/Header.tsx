@@ -30,7 +30,7 @@ const HeaderContainer = styled.header`
   width: 100%;
   background: linear-gradient(0deg, #f5f5f5, #e0e0e0);
   color: #fff;
-  padding: 48px 80px 20px;
+  padding: 48px 150px 20px;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -43,7 +43,7 @@ const HeaderContainer = styled.header`
 const Logo = styled.div`
   font-size: 24px;
   font-weight: bold;
-  color: #4285f4; /* Google Blue Color */
+  color: #4285f4;
 `;
 
 const Navbar = styled.nav`

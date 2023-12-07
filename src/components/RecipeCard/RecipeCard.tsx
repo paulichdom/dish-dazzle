@@ -6,7 +6,11 @@ type RecipeCardProps = {
   tags: string[];
 };
 
-const RecipeCard = ({ imageUrl, recipeName, tags }: RecipeCardProps) => {
+export default function RecipeCard({
+  imageUrl,
+  recipeName,
+  tags,
+}: RecipeCardProps) {
   return (
     <CardContainer>
       <CardImage src={imageUrl} alt={recipeName} />
@@ -20,7 +24,7 @@ const RecipeCard = ({ imageUrl, recipeName, tags }: RecipeCardProps) => {
       </CardContent>
     </CardContainer>
   );
-};
+}
 
 const scaleOnHover = css`
   transition: transform 0.2s ease-in-out;
@@ -66,5 +70,3 @@ const Tag = styled.span`
   margin-bottom: 8px;
   border-radius: 4px;
 `;
-
-export default RecipeCard;
