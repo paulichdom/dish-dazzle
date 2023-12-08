@@ -1,2 +1,2 @@
-export * from './Register';
-export { default } from './Register';
+export * from './Register'
+export { default } from './Register'

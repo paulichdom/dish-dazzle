@@ -1,5 +1,28 @@
 # React + TypeScript + Vite
 
+- Create a new file named .env in the root of your project.
+- Add your API access token to the .env file:
+
+```
+VITE_API_ACCESS_TOKEN=your_api_access_token_here
+```
+
+- Replace your_api_access_token_here with your actual API access token.
+
+### Install Dependencies:
+
+```
+npm install
+```
+
+### Run the Development Server:
+
+```
+npm run dev
+```
+
+---
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

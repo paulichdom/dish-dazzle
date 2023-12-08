@@ -1,19 +1,19 @@
-import styled from "styled-components";
-import { Recipe } from "../../mocks/recipes";
+import styled from 'styled-components'
+import { Recipe } from '../../mocks/recipes'
 
 export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
-  const { title, dateCreated, instructions, tags } = recipe;
+  const { title, dateCreated, instructions, tags } = recipe
 
-  const imageUrl = "https://source.unsplash.com/random";
+  const imageUrl = 'https://source.unsplash.com/random'
 
-  const formattedDate = new Date(dateCreated).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const formattedDate = new Date(dateCreated).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 
   const description =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
 
   return (
     <Container>
@@ -47,7 +47,7 @@ export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
         <DeleteButton>Delete</DeleteButton>
       </CTAContainer>
     </Container>
-  );
+  )
 }
 
 const Container = styled.div`
@@ -56,50 +56,50 @@ const Container = styled.div`
   max-width: 800px;
   justify-self: center;
   gap: 16px;
-`;
+`
 
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px 8px;
   gap: 16px;
-`;
+`
 
 const RecipeImage = styled.img`
   width: 100%;
   max-height: 400px;
   object-fit: cover;
   border-radius: 8px;
-`;
+`
 
 const DetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 0px 8px;
-`;
+`
 
-const Title = styled.h1``;
+const Title = styled.h1``
 
-const Description = styled.p``;
+const Description = styled.p``
 
-const InfoContainer = styled.div``;
+const InfoContainer = styled.div``
 
 const InfoLabel = styled.span`
   font-weight: bold;
   margin-right: 8px;
-`;
+`
 
 const InfoValue = styled.span`
   font-style: italic;
-`;
+`
 
 const CTAContainer = styled.div`
   display: flex;
   flex-direction: row-reverse;
   padding: 0px 8px;
   gap: 16px;
-`;
+`
 
 const EditButton = styled.button`
   background-color: #4caf50;
@@ -108,7 +108,7 @@ const EditButton = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
-`;
+`
 
 const DeleteButton = styled.button`
   background-color: #f44336;
@@ -117,14 +117,14 @@ const DeleteButton = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
-`;
+`
 
-const TagsContainer = styled.div``;
+const TagsContainer = styled.div``
 
 const TagsLabel = styled.span`
   font-weight: bold;
   margin-right: 8px;
-`;
+`
 
 const Tag = styled.span`
   background-color: #f0f0f0;
@@ -134,11 +134,11 @@ const Tag = styled.span`
   margin-right: 8px;
   margin-bottom: 8px;
   border-radius: 4px;
-`;
+`
 
-const InstructionsContainer = styled.div``;
+const InstructionsContainer = styled.div``
 
 const InstructionsLabel = styled.span`
   font-weight: bold;
   margin-right: 8px;
-`;
+`

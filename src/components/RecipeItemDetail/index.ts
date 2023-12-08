@@ -1,2 +1,2 @@
-export * from './RecipeItemDetail';
-export { default } from './RecipeItemDetail';
+export * from './RecipeItemDetail'
+export { default } from './RecipeItemDetail'

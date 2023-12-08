@@ -1,24 +1,26 @@
-import { Fragment, ReactNode } from "react";
-import styled from "styled-components";
-import Header from "../Header";
-import Footer from "../Footer";
+import { Fragment } from 'react'
+import styled from 'styled-components'
+import Header from '../Header'
+import Footer from '../Footer'
+import { useOutlet } from 'react-router-dom'
 
-export default function PageLayout({ children }: { children: ReactNode }) {
+export default function PageLayout() {
+  const outlet = useOutlet()
   return (
     <Fragment>
       <Header />
       <MainWrapper>
-        <Layout>{children}</Layout>
+        <Layout>{outlet}</Layout>
       </MainWrapper>
       <Footer />
     </Fragment>
-  );
+  )
 }
 
 const MainWrapper = styled.div`
   padding: 64px 0px 96px;
   min-height: 100vh;
-`;
+`
 
 const Layout = styled.main`
   display: grid;
@@ -29,4 +31,4 @@ const Layout = styled.main`
   & > * {
     grid-column: 2;
   }
-`;
+`

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
 *,
 *::before,
@@ -12,7 +12,7 @@ html,
 body,
 #root {
   height: 100%;
-  font-family: "Lora", serif;
+  font-family: 'Lora', serif;
 }
 body {
   line-height: 1.5;

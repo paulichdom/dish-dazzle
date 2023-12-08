@@ -1,16 +1,15 @@
-import styled from "styled-components";
-import { Recipe } from "../../mocks/recipes";
-import RecipeCard from "../RecipeCard";
-import { faker } from "@faker-js/faker";
-import { Link } from "react-router-dom";
+import styled from 'styled-components'
+import { Recipe } from '../../mocks/recipes'
+import RecipeCard from '../RecipeCard'
+import { faker } from '@faker-js/faker'
+import { Link } from 'react-router-dom'
 
 type RecipeGridProps = {
-  recipes: Recipe[];
-};
+  recipes: Recipe[]
+}
 
 export default function RecipeGrid(props: RecipeGridProps) {
-  const { recipes } = props;
-  console.log({ recipes });
+  const { recipes } = props
   return (
     <GridLayout>
       {recipes.map(({ id, title, tags }, index) => (
@@ -18,7 +17,7 @@ export default function RecipeGrid(props: RecipeGridProps) {
           <RecipeCard
             recipeId={id}
             imageUrl={faker.image.urlLoremFlickr({
-              category: "food",
+              category: 'food',
             })}
             recipeName={title}
             tags={tags}
@@ -26,7 +25,7 @@ export default function RecipeGrid(props: RecipeGridProps) {
         </Link>
       ))}
     </GridLayout>
-  );
+  )
 }
 
 const GridLayout = styled.div`
@@ -34,4 +33,4 @@ const GridLayout = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   //grid-template-rows: 300px;
   gap: 1rem;
-`;
+`

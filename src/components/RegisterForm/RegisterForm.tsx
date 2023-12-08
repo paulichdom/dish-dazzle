@@ -1,80 +1,76 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { useAuth } from "../../auth/AuthContext";
-import { FormEvent } from "react";
-import { CheckCircle, Circle } from "react-feather";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { useAuth } from '../../auth/AuthContext'
+import { FormEvent } from 'react'
+import { CheckCircle, Circle } from 'react-feather'
+import { Link } from 'react-router-dom'
 
 export default function SignupForm() {
   const initialErrors = [
-    { message: "At least one lowercase letter.", isValid: false },
-    { message: "One uppercase letter.", isValid: false },
-    { message: "One number.", isValid: false },
-    { message: "One special character.", isValid: false },
-  ];
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailValid, setEmailValid] = useState(false);
-  const [passwordValid, setPasswordValid] = useState(false);
-  const [passwordErrors, setPasswordErrors] = useState(initialErrors);
-  const { signup } = useAuth();
+    { message: 'At least one lowercase letter.', isValid: false },
+    { message: 'One uppercase letter.', isValid: false },
+    { message: 'One number.', isValid: false },
+    { message: 'One special character.', isValid: false },
+  ]
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [emailValid, setEmailValid] = useState(false)
+  const [passwordValid, setPasswordValid] = useState(false)
+  const [passwordErrors, setPasswordErrors] = useState(initialErrors)
+  const { signup } = useAuth()
 
   const validateEmail = (value: string) => {
-    const isValid = value.includes("@");
-    console.log({ emailValid });
-    setEmailValid(isValid);
-    return isValid;
-  };
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+    setEmailValid(isValid)
+    return isValid
+  }
 
   const validatePassword = (value: string) => {
     const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/
 
-    const lowercase = /^(?=.*[a-z])/.test(value);
-    const uppercase = /^(?=.*[A-Z])/.test(value);
-    const number = /^(?=.*\d)/.test(value);
-    const specialChar = /^(?=.*[@$!%*?&])/.test(value);
+    const lowercase = /^(?=.*[a-z])/.test(value)
+    const uppercase = /^(?=.*[A-Z])/.test(value)
+    const number = /^(?=.*\d)/.test(value)
+    const specialChar = /^(?=.*[@$!%*?&])/.test(value)
 
     const errors = passwordErrors.map((error) => {
-      if (error.message === "At least one lowercase letter.") {
-        return { ...error, isValid: lowercase };
-      } else if (error.message === "One uppercase letter.") {
-        return { ...error, isValid: uppercase };
-      } else if (error.message === "One number.") {
-        return { ...error, isValid: number };
-      } else if (error.message === "One special character.") {
-        return { ...error, isValid: specialChar };
+      if (error.message === 'At least one lowercase letter.') {
+        return { ...error, isValid: lowercase }
+      } else if (error.message === 'One uppercase letter.') {
+        return { ...error, isValid: uppercase }
+      } else if (error.message === 'One number.') {
+        return { ...error, isValid: number }
+      } else if (error.message === 'One special character.') {
+        return { ...error, isValid: specialChar }
       }
-      return error;
-    });
+      return error
+    })
 
-    setPasswordValid(passwordRegex.test(value));
-    setPasswordErrors(errors);
-    return passwordRegex.test(value);
-  };
+    setPasswordValid(passwordRegex.test(value))
+    setPasswordErrors(errors)
+    return passwordRegex.test(value)
+  }
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setEmail(value);
-    validateEmail(value);
-  };
+    const value = e.target.value
+    setEmail(value)
+    validateEmail(value)
+  }
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setPassword(value);
-    validatePassword(value);
-  };
+    const value = e.target.value
+    setPassword(value)
+    validatePassword(value)
+  }
 
   const handleSignup = (e: FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const isEmailValid = validateEmail(email);
-    const isPasswordValid = validatePassword(password);
-
-    if (isEmailValid && isPasswordValid) {
-      signup(email, password);
+    if (emailValid && passwordValid) {
+      signup(email, password)
     }
-  };
+  }
 
   return (
     <Container>
@@ -112,7 +108,7 @@ export default function SignupForm() {
             ))}
           </ErrorList>
         </Label>
-        <SignupButton type="submit" disabled={!passwordValid}>
+        <SignupButton type="submit" disabled={!emailValid || !passwordValid}>
           Sign Up
         </SignupButton>
         <LoginLinkContainer>
@@ -123,22 +119,22 @@ export default function SignupForm() {
         </LoginLinkContainer>
       </Form>
     </Container>
-  );
+  )
 }
 
 const Container = styled.div`
   text-align: center;
-`;
+`
 
 const Title = styled.h2`
   margin-bottom: 8px;
-`;
+`
 
 const Description = styled.p`
   color: #666;
   font-size: 0.9rem;
   margin-bottom: 16px;
-`;
+`
 
 const Form = styled.form`
   width: max-content;
@@ -146,13 +142,13 @@ const Form = styled.form`
   border: 1px dotted silver;
   border-radius: 2px;
   padding: 26px 32px 32px;
-`;
+`
 
 const Label = styled.label`
   display: block;
   margin-bottom: 16px;
   position: relative;
-`;
+`
 
 const LabelText = styled.span`
   display: block;
@@ -161,7 +157,7 @@ const LabelText = styled.span`
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 600;
-`;
+`
 
 const Input = styled.input`
   display: block;
@@ -177,7 +173,7 @@ const Input = styled.input`
     outline-offset: 2px;
     border-color: transparent;
   }
-`;
+`
 
 const SignupButton = styled.button`
   display: block;
@@ -202,10 +198,10 @@ const SignupButton = styled.button`
   }
 
   &:disabled {
-    background: #D3D3D3;
+    background: #d3d3d3;
     cursor: not-allowed;
   }
-`;
+`
 
 const ErrorList = styled.ul`
   display: flex;
@@ -213,28 +209,28 @@ const ErrorList = styled.ul`
   gap: 8px;
   font-size: 0.8rem;
   padding: 16px 0px 0px 2px;
-`;
+`
 
 const ListItem = styled.li`
   display: flex;
   align-items: center;
-`;
+`
 
 const ListItemText = styled.span`
   color: #333;
   padding-left: 4px;
-`;
+`
 
 const LoginLinkContainer = styled.div`
   padding: 16px 0px 0px;
-`;
+`
 
 const LoginText = styled.span`
   font-size: 14px;
-`;
+`
 
 const LoginLink = styled(Link)`
   font-size: 14px;
   padding-left: 4px;
   color: inherit;
-`;
+`

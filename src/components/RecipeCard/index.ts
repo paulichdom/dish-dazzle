@@ -1,2 +1,2 @@
-export * from './RecipeCard';
-export { default } from './RecipeCard';
+export * from './RecipeCard'
+export { default } from './RecipeCard'

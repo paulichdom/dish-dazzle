@@ -1,11 +1,6 @@
-import PageLayout from '../../components/PageLayout';
-import RecipeGrid from '../../components/RecipeGrid';
-import { recipes } from '../../mocks/recipes';
+import RecipeGrid from '../../components/RecipeGrid'
+import { recipes } from '../../mocks/recipes'
 
 export default function Recipes() {
-  return (
-    <PageLayout>
-      <RecipeGrid recipes={recipes} />
-    </PageLayout>
-  );
+  return <RecipeGrid recipes={recipes} />
 }

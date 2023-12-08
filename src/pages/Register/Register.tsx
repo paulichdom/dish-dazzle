@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import RegisterForm from '../../components/RegisterForm';
+import styled from 'styled-components'
+import RegisterForm from '../../components/RegisterForm'
 
 export default function Register() {
   return (
@@ -14,6 +14,4 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 80vh;
-`;
-
-
+`

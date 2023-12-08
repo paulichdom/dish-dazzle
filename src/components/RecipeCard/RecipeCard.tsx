@@ -1,16 +1,16 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
 
 type RecipeCardProps = {
-  recipeId: string;
-  imageUrl: string;
-  recipeName: string;
-  tags: string[];
-};
+  recipeId: string
+  imageUrl: string
+  recipeName: string
+  tags: string[]
+}
 
 export default function RecipeCard({
   imageUrl,
   recipeName,
-  tags
+  tags,
 }: RecipeCardProps) {
   return (
     <CardContainer>
@@ -24,7 +24,7 @@ export default function RecipeCard({
         </TagsContainer>
       </CardContent>
     </CardContainer>
-  );
+  )
 }
 
 const scaleOnHover = css`
@@ -32,35 +32,35 @@ const scaleOnHover = css`
   &:hover {
     transform: scale(1.05);
   }
-`;
+`
 
 const CardContainer = styled.div`
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   ${scaleOnHover}
-`;
+`
 
 const CardImage = styled.img`
   width: 100%;
   max-height: 200px;
   object-fit: cover;
-`;
+`
 
 const CardContent = styled.div`
   padding: 15px;
-`;
+`
 
 const RecipeName = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 8px;
-`;
+`
 
 const TagsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 8px;
-`;
+`
 
 const Tag = styled.span`
   background-color: #f0f0f0;
@@ -70,4 +70,4 @@ const Tag = styled.span`
   margin-right: 8px;
   margin-bottom: 8px;
   border-radius: 4px;
-`;
+`

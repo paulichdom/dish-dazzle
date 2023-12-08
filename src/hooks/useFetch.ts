@@ -1,162 +1,168 @@
-import { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useReducer, useRef } from 'react'
 
 export const httpMethods = {
-    GET: 'GET',
-    POST: 'POST',
-    PUT: 'PUT',
-    DELETE: 'DELETE',
-    PATCH: 'PATCH',
-    HEAD: 'HEAD',
-    OPTIONS: 'OPTIONS',
-} as const;
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
+  PATCH: 'PATCH',
+  HEAD: 'HEAD',
+  OPTIONS: 'OPTIONS',
+} as const
 
 type Meta = {
-    status_code: number;
-    status: string;
-    message: string;
-    more_info: Record<string, never>;
-    errors: never[];
-};
+  status_code: number
+  status: string
+  message: string
+  more_info: Record<string, never>
+  errors: never[]
+}
 
 type ApiResponse<T> = {
-    meta: Meta;
-    data: T;
-};
+  meta: Meta
+  data: T
+}
 
 type State<T> = {
-    data?: T;
-    error?: Error;
-    loading: boolean;
-};
+  data?: T
+  error?: Error
+  loading: boolean
+}
 
-type Cache<T> = { [url: string]: T };
+type Cache<T> = { [url: string]: T }
 
-type Action<T> = { type: 'loading' } | { type: 'fetched'; payload: T } | { type: 'error'; payload: Error };
+type Action<T> =
+  | { type: 'loading' }
+  | { type: 'fetched'; payload: T }
+  | { type: 'error'; payload: Error }
 
 type SearchParams = {
-    [key: string]: string;
-};
+  [key: string]: string
+}
 
 export const useFetch = <T = unknown>(
-    path?: string,
-    fetchParameters: {
-        method?: string;
-        immediate?: boolean;
-        searchParams?: SearchParams;
-        skip?: boolean;
-        onCompleted?: () => void;
-        onError?: () => void;
-    } = {
-            method: httpMethods.GET,
-            immediate: true,
-            skip: false,
-        },
+  path?: string,
+  fetchParameters: {
+    method?: string
+    immediate?: boolean
+    searchParams?: SearchParams
+    skip?: boolean
+    onCompleted?: () => void
+    onError?: () => void
+  } = {
+    method: httpMethods.GET,
+    immediate: true,
+    skip: false,
+  },
 ): { state: State<T>; action: () => void } => {
-    const accessToken = import.meta.env.VITE_API_ACCESS_TOKEN;
-    console.log({ accessToken })
+  const accessToken = import.meta.env.VITE_API_ACCESS_TOKEN
 
-    const { method, immediate, searchParams, skip, onCompleted, onError } = fetchParameters;
+  const { method, immediate, searchParams, skip, onCompleted, onError } =
+    fetchParameters
 
-    let url = `${path}`;
+  let url = `${path}`
 
-    if (searchParams) {
-        const searchParamsObject = new URLSearchParams(searchParams);
-        const paramPairs = [];
+  if (searchParams) {
+    const searchParamsObject = new URLSearchParams(searchParams)
+    const paramPairs = []
 
-        for (const [key, value] of searchParamsObject) {
-            const decodedKey = decodeURIComponent(key);
-            const decodedValue = decodeURIComponent(value);
-            paramPairs.push(`${decodedKey}=${decodedValue}`);
-        }
-
-        const decodedQueryString = paramPairs.join('&');
-        url += `?${decodedQueryString}`;
+    for (const [key, value] of searchParamsObject) {
+      const decodedKey = decodeURIComponent(key)
+      const decodedValue = decodeURIComponent(value)
+      paramPairs.push(`${decodedKey}=${decodedValue}`)
     }
 
-    const options: RequestInit = {
-        method,
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            'authid': `${accessToken}`,
-        },
-    };
+    const decodedQueryString = paramPairs.join('&')
+    url += `?${decodedQueryString}`
+  }
 
-    const cache = useRef<Cache<T>>({});
+  const options: RequestInit = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      authid: `${accessToken}`,
+    },
+  }
 
-    // Used to prevent state update if the component is unmounted
-    const cancelRequest = useRef<boolean>(false);
+  const cache = useRef<Cache<T>>({})
 
-    const initialState: State<T> = {
-        error: undefined,
-        data: undefined,
-        loading: false,
-    };
+  // Used to prevent state update if the component is unmounted
+  const cancelRequest = useRef<boolean>(false)
 
-    const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
-        switch (action.type) {
-            case 'loading':
-                return { ...initialState, loading: true };
-            case 'fetched':
-                return { ...initialState, data: action.payload, loading: false };
-            case 'error':
-                return { ...initialState, error: action.payload, loading: false };
-            default:
-                return state;
-        }
-    };
+  const initialState: State<T> = {
+    error: undefined,
+    data: undefined,
+    loading: false,
+  }
 
-    const [state, dispatch] = useReducer(fetchReducer, initialState);
+  const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
+    switch (action.type) {
+      case 'loading':
+        return { ...initialState, loading: true }
+      case 'fetched':
+        return { ...initialState, data: action.payload, loading: false }
+      case 'error':
+        return { ...initialState, error: action.payload, loading: false }
+      default:
+        return state
+    }
+  }
 
-    const fetchData = async () => {
-        dispatch({ type: 'loading' });
+  const [state, dispatch] = useReducer(fetchReducer, initialState)
 
-        if (cache.current[url]) {
-            dispatch({ type: 'fetched', payload: cache.current[url] });
-            return;
-        }
+  const fetchData = async () => {
+    dispatch({ type: 'loading' })
 
-        try {
-            const response = await fetch(url, options);
-            if (!response.ok) {
-                throw new Error(response.statusText);
-            }
-
-            const apiResponse = (await response.json()) as ApiResponse<T>;
-            cache.current[url] = apiResponse.data;
-            if (cancelRequest.current) return;
-
-            dispatch({ type: 'fetched', payload: apiResponse.data });
-
-            if (onCompleted) onCompleted();
-        } catch (error) {
-            if (cancelRequest.current) return;
-
-            dispatch({ type: 'error', payload: error as Error });
-
-            if (onError) onError();
-        }
-    };
-
-    const execute = () => {
-        void fetchData();
-    };
-
-    useEffect(() => {
-        if (!url) return;
-
-        cancelRequest.current = false;
-
-        if (immediate) execute();
-
-        return () => {
-            cancelRequest.current = true;
-        };
-    }, [url]);
-
-    if (skip) {
-        return { state: { error: undefined, data: undefined, loading: false }, action: () => { } };
+    if (cache.current[url]) {
+      dispatch({ type: 'fetched', payload: cache.current[url] })
+      return
     }
 
-    return { state, action: execute };
-};
+    try {
+      const response = await fetch(url, options)
+      if (!response.ok) {
+        throw new Error(response.statusText)
+      }
+
+      const apiResponse = (await response.json()) as ApiResponse<T>
+      cache.current[url] = apiResponse.data
+      if (cancelRequest.current) return
+
+      dispatch({ type: 'fetched', payload: apiResponse.data })
+
+      if (onCompleted) onCompleted()
+    } catch (error) {
+      if (cancelRequest.current) return
+
+      dispatch({ type: 'error', payload: error as Error })
+
+      if (onError) onError()
+    }
+  }
+
+  const execute = () => {
+    void fetchData()
+  }
+
+  useEffect(() => {
+    if (!url) return
+
+    cancelRequest.current = false
+
+    if (immediate) execute()
+
+    return () => {
+      cancelRequest.current = true
+    }
+  }, [url])
+
+  if (skip) {
+    return {
+      state: { error: undefined, data: undefined, loading: false },
+      action: () => {},
+    }
+  }
+
+  return { state, action: execute }
+}
