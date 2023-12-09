@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Recipe } from '../../mocks/recipes'
+import Button from '../Button'
 
 export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
   const { title, dateCreated, instructions, tags } = recipe
@@ -43,6 +44,7 @@ export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
         </InstructionsContainer>
       </DetailsContainer>
       <CTAContainer>
+        <Button size='medium' variant='fill'>Test</Button>
         <EditButton>Edit</EditButton>
         <DeleteButton>Delete</DeleteButton>
       </CTAContainer>

@@ -10,6 +10,7 @@ export default function LoginForm() {
   const [passwordError, setPasswordError] = useState('')
   const { login, isLoading } = useAuth()
 
+
   const validateEmail = (value: string) => {
     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
     return isValidEmail
