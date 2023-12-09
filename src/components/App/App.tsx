@@ -7,15 +7,18 @@ import Error from '../../pages/Error'
 import { AuthProvider } from '../../auth/AuthContext'
 import ProtectedRoute from '../ProtectedRoute'
 import PageLayout from '../PageLayout'
+import AuthRoute from '../AuthRoute'
 
 export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route index path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route element={<AuthRoute />} >
+            <Route path="/" element={<Login />} />
+            <Route index path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
           <Route element={<ProtectedRoute />}>
             <Route element={<PageLayout />}>
               <Route path="/recipes" element={<Recipes />} />
