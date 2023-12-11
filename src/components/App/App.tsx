@@ -25,8 +25,8 @@ export default function App() {
             <Route element={<PageLayout />}>
               <Route path="/recipes" element={<Recipes />} />
               <Route path="/recipes/:id" element={<RecipeDetails />} />
-              <Route path='/recipes/create' element={<CreateRecipe />} />
-              <Route path='/recipes/:id/edit' element={<EditRecipe />} />
+              <Route path="/recipes/create" element={<CreateRecipe />} />
+              <Route path="/recipes/:id/edit" element={<EditRecipe />} />
             </Route>
           </Route>
           <Route path="*" element={<Error />} />

@@ -8,43 +8,49 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Recipes() {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1)
 
   const { recipes } = useRecipes()
 
   if (!recipes) return <p>Loading ...</p>
 
   const handleSearch = (query: string) => {
-    console.log('Search query:', query);
-  };
+    console.log('Search query:', query)
+  }
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+    setCurrentPage(page)
+  }
 
-  const totalPages = 10;
+  const totalPages = 10
 
   return (
     <Container>
       <ActionBar>
         <Search onSearch={handleSearch} />
-        <AddButton><NavLink to={`/recipes/create`}>Add recipe</NavLink></AddButton>
+        <AddButton>
+          <NavLink to={`/recipes/create`}>Add recipe</NavLink>
+        </AddButton>
       </ActionBar>
       <RecipeGrid recipes={recipes as Recipe[]} />
-      <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </Container>
   )
 }
 
 const Container = styled(Column)`
   gap: 32px;
-`;
+`
 
 const ActionBar = styled(Row)`
   gap: 16px;
   justify-content: flex-end;
   align-items: baseline;
-`;
+`
 
 const AddButton = styled(BaseButton)`
   color: #4285f4;
@@ -53,10 +59,10 @@ const AddButton = styled(BaseButton)`
 
   &:hover {
     color: #357ae8;
-    border-color: #789fde; 
-    background-color: #e8f4f8; 
+    border-color: #789fde;
+    background-color: #e8f4f8;
   }
-`;
+`
 
 const NavLink = styled(Link)`
   color: inherit;

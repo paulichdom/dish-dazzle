@@ -5,7 +5,9 @@ export default function CreateRecipe() {
   const navigator = useNavigate()
 
   const handleCancel = () => {
-    navigator('/recipes');
+    navigator('/recipes')
   }
-  return <RecipeForm isEditMode={false} onCancel={handleCancel} onSave={() => { }} />
+  return (
+    <RecipeForm isEditMode={false} onCancel={handleCancel} onSave={() => {}} />
+  )
 }

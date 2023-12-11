@@ -5,7 +5,7 @@ export default function EditRecipe() {
   const navigator = useNavigate()
   const { state } = useLocation()
 
-  const { recipe } = state;
+  const { recipe } = state
 
   const handleCancel = () => {
     navigator(`/recipes/${recipe.id}`)
@@ -15,7 +15,7 @@ export default function EditRecipe() {
     <RecipeForm
       isEditMode={true}
       onCancel={handleCancel}
-      onSave={() => { }}
+      onSave={() => {}}
       recipe={recipe}
     />
   )
