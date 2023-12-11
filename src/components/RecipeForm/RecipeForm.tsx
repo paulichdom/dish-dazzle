@@ -5,7 +5,7 @@ import { XCircle } from 'react-feather'
 import { BaseButton } from '../Layout'
 import { useAuth } from '../../auth/AuthContext'
 
-export type RecipeWithoutId = Omit<Recipe, 'id'>;
+export type RecipeWithoutId = Omit<Recipe, 'id'>
 
 type ModalProps = {
   recipe?: Recipe
@@ -13,7 +13,6 @@ type ModalProps = {
   onSave: (recipe: { recipe: Recipe | RecipeWithoutId }) => void
   onCancel: () => void
 }
-
 
 const Modal: React.FC<ModalProps> = ({
   recipe,
@@ -56,13 +55,13 @@ const Modal: React.FC<ModalProps> = ({
   }
 
   const getFormattedDate = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = (today.getMonth() + 1).toString().padStart(2, '0');
-    const day = today.getDate().toString().padStart(2, '0');
+    const today = new Date()
+    const year = today.getFullYear()
+    const month = (today.getMonth() + 1).toString().padStart(2, '0')
+    const day = today.getDate().toString().padStart(2, '0')
 
-    return `${year}-${month}-${day}`;
-  };
+    return `${year}-${month}-${day}`
+  }
 
   const handleSaveClick = () => {
     if (recipe) {
@@ -75,7 +74,7 @@ const Modal: React.FC<ModalProps> = ({
           authorId: authorId as string,
           instructions,
           tags,
-        }
+        },
       })
     }
   }

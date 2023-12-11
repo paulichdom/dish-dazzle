@@ -15,6 +15,10 @@ export default function CreateRecipe() {
   }
 
   return (
-    <RecipeForm isEditMode={false} onCancel={handleCancel} onSave={handleSave} />
+    <RecipeForm
+      isEditMode={false}
+      onCancel={handleCancel}
+      onSave={handleSave}
+    />
   )
 }
