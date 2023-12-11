@@ -2,9 +2,11 @@ import styled from 'styled-components'
 import { Recipe } from '../../hooks/useRecipes'
 import { BaseButton } from '../Layout'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../auth/AuthContext'
 
 export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
-  const { id, title, dateCreated, instructions, tags } = recipe
+  const { accessToken } = useAuth()
+  const { id, title, dateCreated, instructions, tags, authorId } = recipe
 
   const imageUrl = 'https://source.unsplash.com/random'
 
@@ -19,7 +21,7 @@ export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
     nisi ut aliquip ex ea commodo consequat.`
 
-  // TODO: const showCTAs = authorId === accessToken;
+  const showCTAs = authorId === accessToken
 
   return (
     <Container>
@@ -48,14 +50,16 @@ export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
           </ul>
         </InstructionsContainer>
       </DetailsContainer>
-      <CTAContainer>
-        <EditButton>
-          <NavLink to={`/recipes/${id}/edit`} state={{ recipe: recipe }}>
-            Edit
-          </NavLink>
-        </EditButton>
-        <DeleteButton>Delete</DeleteButton>
-      </CTAContainer>
+      {showCTAs && (
+        <CTAContainer>
+          <EditButton>
+            <NavLink to={`/recipes/${id}/edit`} state={{ recipe: recipe }}>
+              Edit
+            </NavLink>
+          </EditButton>
+          <DeleteButton>Delete</DeleteButton>
+        </CTAContainer>
+      )}
     </Container>
   )
 }

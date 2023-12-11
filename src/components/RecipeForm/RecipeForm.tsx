@@ -7,10 +7,16 @@ import { useAuth } from '../../auth/AuthContext'
 
 export type RecipeWithoutId = Omit<Recipe, 'id'>
 
+export type UpdateRecipeData = {
+  recipeId: string
+  recipe: RecipeWithoutId
+}
+
 type ModalProps = {
   recipe?: Recipe
   isEditMode: boolean
-  onSave: (recipe: { recipe: Recipe | RecipeWithoutId }) => void
+  onSave?: (recipe: { recipe: RecipeWithoutId }) => void
+  onUpdate?: (recipe: { recipe: UpdateRecipeData }) => void
   onCancel: () => void
 }
 
@@ -18,6 +24,7 @@ const Modal: React.FC<ModalProps> = ({
   recipe,
   isEditMode,
   onSave,
+  onUpdate,
   onCancel,
 }) => {
   const { accessToken: authorId } = useAuth()
@@ -64,9 +71,15 @@ const Modal: React.FC<ModalProps> = ({
   }
 
   const handleSaveClick = () => {
-    if (recipe) {
-      onSave({ recipe: { ...recipe, title, instructions, tags } })
-    } else {
+    if (onUpdate && recipe) {
+      const { id, ...valuesToUpdate } = recipe
+      onUpdate({
+        recipe: {
+          recipeId: id,
+          recipe: { ...valuesToUpdate, title, instructions, tags },
+        },
+      })
+    } else if (onSave) {
       onSave({
         recipe: {
           title,

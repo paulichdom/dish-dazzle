@@ -13,7 +13,7 @@ export default function RecipeGrid(props: RecipeGridProps) {
   return (
     <GridLayout>
       {recipes.map(({ id, title, tags }, index) => (
-        <Link key={index} to={`/recipes/${id}`}>
+        <NavLink key={index} to={`/recipes/${id}`}>
           <RecipeCard
             recipeId={id}
             imageUrl={faker.image.urlLoremFlickr({
@@ -22,7 +22,7 @@ export default function RecipeGrid(props: RecipeGridProps) {
             recipeName={title}
             tags={tags}
           />
-        </Link>
+        </NavLink>
       ))}
     </GridLayout>
   )
@@ -33,4 +33,9 @@ const GridLayout = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   //grid-template-rows: 300px;
   gap: 1rem;
+`
+
+const NavLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
 `

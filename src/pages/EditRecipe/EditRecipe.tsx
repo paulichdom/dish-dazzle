@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import RecipeForm from '../../components/RecipeForm'
+import RecipeForm, { UpdateRecipeData } from '../../components/RecipeForm'
 
 export default function EditRecipe() {
   const navigator = useNavigate()
@@ -11,11 +11,15 @@ export default function EditRecipe() {
     navigator(`/recipes/${recipe.id}`)
   }
 
+  const handleUpdate = (recipe: { recipe: UpdateRecipeData }) => {
+    console.log({ recipe })
+  }
+
   return (
     <RecipeForm
       isEditMode={true}
       onCancel={handleCancel}
-      onSave={() => {}}
+      onUpdate={handleUpdate}
       recipe={recipe}
     />
   )
