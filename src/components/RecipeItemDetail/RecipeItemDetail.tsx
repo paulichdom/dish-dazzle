@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import Button from '../Button'
 import { Recipe } from '../../hooks/useRecipes'
+import { BaseButton } from '../Layout'
+import { Link } from 'react-router-dom'
 
 export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
-  const { title, dateCreated, instructions, tags } = recipe
+  const { id, title, dateCreated, instructions, tags } = recipe
 
   const imageUrl = 'https://source.unsplash.com/random'
 
@@ -48,10 +49,11 @@ export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
         </InstructionsContainer>
       </DetailsContainer>
       <CTAContainer>
-        <Button size="medium" variant="fill">
-          Test
-        </Button>
-        <EditButton>Edit</EditButton>
+        <EditButton>
+          <NavLink to={`/recipes/${id}/edit`} state={{ recipe: recipe }}>
+            Edit
+          </NavLink>
+        </EditButton>
         <DeleteButton>Delete</DeleteButton>
       </CTAContainer>
     </Container>
@@ -109,22 +111,14 @@ const CTAContainer = styled.div`
   gap: 16px;
 `
 
-const EditButton = styled.button`
-  background-color: #4caf50;
-  color: white;
-  padding: 8px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+const EditButton = styled(BaseButton)`
+  color: orange;
+  border-color: orange;
 `
 
-const DeleteButton = styled.button`
-  background-color: #f44336;
-  color: white;
-  padding: 8px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+const DeleteButton = styled(BaseButton)`
+  color: red;
+  border-color: red;
 `
 
 const TagsContainer = styled.div``
@@ -149,4 +143,9 @@ const InstructionsContainer = styled.div``
 const InstructionsLabel = styled.span`
   font-weight: bold;
   margin-right: 8px;
+`
+
+const NavLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
 `

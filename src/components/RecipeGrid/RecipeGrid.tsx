@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { Recipe } from '../../mocks/recipes'
 import RecipeCard from '../RecipeCard'
 import { faker } from '@faker-js/faker'
 import { Link } from 'react-router-dom'
+import { Recipe } from '../../hooks/useRecipes'
 
 type RecipeGridProps = {
   recipes: Recipe[]

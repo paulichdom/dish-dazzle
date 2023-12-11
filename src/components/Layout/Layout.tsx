@@ -13,3 +13,12 @@ export const Row = styled.div`
   align-items: stretch;
   justify-content: stretch;
 `
+
+export const BaseButton = styled.button`
+  background-color: #fff;
+  color: #333;
+  padding: 10px 15px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  cursor: pointer;
+`

@@ -8,6 +8,8 @@ import { AuthProvider } from '../../auth/AuthContext'
 import ProtectedRoute from '../ProtectedRoute'
 import PageLayout from '../PageLayout'
 import AuthRoute from '../AuthRoute'
+import CreateRecipe from '../../pages/CreateRecipe'
+import EditRecipe from '../../pages/EditRecipe'
 
 export default function App() {
   return (
@@ -23,6 +25,8 @@ export default function App() {
             <Route element={<PageLayout />}>
               <Route path="/recipes" element={<Recipes />} />
               <Route path="/recipes/:id" element={<RecipeDetails />} />
+              <Route path='/recipes/create' element={<CreateRecipe />} />
+              <Route path='/recipes/:id/edit' element={<EditRecipe />} />
             </Route>
           </Route>
           <Route path="*" element={<Error />} />
