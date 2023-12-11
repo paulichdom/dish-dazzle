@@ -1,21 +1,20 @@
-
-import { ReactNode } from 'react';
-import styled from 'styled-components';
+import { ReactNode } from 'react'
+import styled from 'styled-components'
 
 type ButtonProps = {
-  variant: 'fill' | 'outline' | 'ghost';
-  size: 'small' | 'medium' | 'large';
-  disabled?: boolean;
-  isLoading?: boolean;
-  children: ReactNode;
-  onClick?: () => void;
-};
+  variant: 'fill' | 'outline' | 'ghost'
+  size: 'small' | 'medium' | 'large'
+  disabled?: boolean
+  isLoading?: boolean
+  children: ReactNode
+  onClick?: () => void
+}
 
 type Sizes = {
   [key in ButtonProps['size']]: {
-    [key: string]: unknown;
-  };
-};
+    [key: string]: unknown
+  }
+}
 
 const SIZES: Sizes = {
   small: {
@@ -33,23 +32,23 @@ const SIZES: Sizes = {
     '--fontSize': `${21 / 16}rem`,
     '--padding': '18px 32px',
   },
-};
+}
 
 export default function Button({ variant, size, children }: ButtonProps) {
-  const styles = SIZES[size];
+  const styles = SIZES[size]
 
-  let Component;
+  let Component
   if (variant === 'fill') {
-    Component = FillButton;
+    Component = FillButton
   } else if (variant === 'outline') {
-    Component = OutlinelButton;
+    Component = OutlinelButton
   } else if (variant === 'ghost') {
-    Component = GhostButton;
+    Component = GhostButton
   } else {
-    throw new Error(`Unrecognised Button variant: ${variant}`);
+    throw new Error(`Unrecognised Button variant: ${variant}`)
   }
 
-  return <Component style={styles}>{children}</Component>;
+  return <Component style={styles}>{children}</Component>
 }
 
 const ButtonBase = styled.button`
@@ -63,7 +62,7 @@ const ButtonBase = styled.button`
     outline-color: hsl(240deg 100% 60%);
     outline-offset: 4px;
   }
-`;
+`
 
 const FillButton = styled(ButtonBase)`
   background-color: hsl(240deg 100% 60%);
@@ -72,7 +71,7 @@ const FillButton = styled(ButtonBase)`
   &:hover {
     background-color: hsl(235deg 100% 62%);
   }
-`;
+`
 
 const OutlinelButton = styled(ButtonBase)`
   background-color: white;
@@ -82,7 +81,7 @@ const OutlinelButton = styled(ButtonBase)`
   &:hover {
     background-color: hsl(235deg 85% 97%);
   }
-`;
+`
 
 const GhostButton = styled(ButtonBase)`
   color: hsl(240deg 10% 50%);
@@ -96,4 +95,4 @@ const GhostButton = styled(ButtonBase)`
     background: hsl(240deg 10% 50% / 0.15);
     color: hsl(0deg 0% 0%);
   }
-`;
+`

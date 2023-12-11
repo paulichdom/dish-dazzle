@@ -37,10 +37,10 @@ export const useFetch = <T = unknown>(
     onCompleted?: () => void
     onError?: () => void
   } = {
-      method: httpMethods.GET,
-      immediate: true,
-      skip: false,
-    },
+    method: httpMethods.GET,
+    immediate: true,
+    skip: false,
+  },
 ): { state: State<T>; action: () => void } => {
   const accessToken = import.meta.env.VITE_API_ACCESS_TOKEN
 
@@ -147,7 +147,7 @@ export const useFetch = <T = unknown>(
   if (skip) {
     return {
       state: { error: undefined, data: undefined, loading: false },
-      action: () => { },
+      action: () => {},
     }
   }
 
