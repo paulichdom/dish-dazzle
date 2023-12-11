@@ -1,4 +1,4 @@
-import { useFetch } from './useFetch'
+import { httpMethods, useFetch } from './useFetch'
 
 const API_PATHS = {
   GET_ALL_RECIPES: 'https://getrecipes-zazjbx7nka-uc.a.run.app/',
@@ -25,6 +25,7 @@ export default function useRecipes(recipeId?: string): RecipesInfo {
   const { state: recipeState } = useFetch<{ recipe: Recipe }>(
     API_PATHS.GET_RECIPE,
     {
+      method: httpMethods.GET,
       searchParams: {
         recipeId: recipeId as string,
       },
@@ -42,6 +43,7 @@ export default function useRecipes(recipeId?: string): RecipesInfo {
   const { state: recipesState } = useFetch<{ recipes: Recipe[] }>(
     API_PATHS.GET_ALL_RECIPES,
     {
+      method: httpMethods.GET,
       immediate: true,
       skip: !!recipeId,
     },

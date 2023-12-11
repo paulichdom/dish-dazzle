@@ -3,13 +3,17 @@ import styled from 'styled-components'
 import { Recipe } from '../../hooks/useRecipes'
 import { XCircle } from 'react-feather'
 import { BaseButton } from '../Layout'
+import { useAuth } from '../../auth/AuthContext'
+
+export type RecipeWithoutId = Omit<Recipe, 'id'>;
 
 type ModalProps = {
   recipe?: Recipe
   isEditMode: boolean
-  onSave: (recipe: Recipe) => void
+  onSave: (recipe: { recipe: Recipe | RecipeWithoutId }) => void
   onCancel: () => void
 }
+
 
 const Modal: React.FC<ModalProps> = ({
   recipe,
@@ -17,6 +21,8 @@ const Modal: React.FC<ModalProps> = ({
   onSave,
   onCancel,
 }) => {
+  const { accessToken: authorId } = useAuth()
+
   const [title, setTitle] = useState('')
   const [instructions, setInstructions] = useState<string[]>([])
   const [tags, setTags] = useState<string[]>([])
@@ -49,17 +55,27 @@ const Modal: React.FC<ModalProps> = ({
     setTags(tags.filter((_, idx) => idx !== index))
   }
 
+  const getFormattedDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  };
+
   const handleSaveClick = () => {
     if (recipe) {
-      onSave({ ...recipe, title, instructions, tags })
+      onSave({ recipe: { ...recipe, title, instructions, tags } })
     } else {
       onSave({
-        id: '',
-        title,
-        dateCreated: '',
-        authorId: '',
-        instructions,
-        tags,
+        recipe: {
+          title,
+          dateCreated: getFormattedDate(),
+          authorId: authorId as string,
+          instructions,
+          tags,
+        }
       })
     }
   }

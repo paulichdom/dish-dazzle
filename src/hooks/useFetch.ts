@@ -30,18 +30,18 @@ type SearchParams = {
 export const useFetch = <T = unknown>(
   path?: string,
   fetchParameters: {
-    method?: string
+    method: string
     immediate?: boolean
     searchParams?: SearchParams
     skip?: boolean
     onCompleted?: () => void
     onError?: () => void
   } = {
-    method: httpMethods.GET,
-    immediate: true,
-    skip: false,
-  },
-): { state: State<T>; action: () => void } => {
+      method: httpMethods.GET,
+      immediate: true,
+      skip: false,
+    },
+): { state: State<T>; action: (body?: unknown) => void } => {
   const accessToken = import.meta.env.VITE_API_ACCESS_TOKEN
 
   const { method, immediate, searchParams, skip, onCompleted, onError } =
@@ -61,15 +61,6 @@ export const useFetch = <T = unknown>(
 
     const decodedQueryString = paramPairs.join('&')
     url += `?${decodedQueryString}`
-  }
-
-  const options: RequestInit = {
-    method,
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      authid: `${accessToken}`,
-    },
   }
 
   const cache = useRef<Cache<T>>({})
@@ -98,8 +89,21 @@ export const useFetch = <T = unknown>(
 
   const [state, dispatch] = useReducer(fetchReducer, initialState)
 
-  const fetchData = async () => {
+  const fetchData = async (body?: unknown) => {
     dispatch({ type: 'loading' })
+
+    //const hasBody = ['POST', 'PUT', 'PATCH'].includes(method);
+    const formattedBody = body ? JSON.stringify(body) : undefined
+
+    const options: RequestInit = {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        authid: `${accessToken}`,
+      },
+      body: formattedBody,
+    }
 
     if (cache.current[url]) {
       dispatch({ type: 'fetched', payload: cache.current[url] })
@@ -128,8 +132,8 @@ export const useFetch = <T = unknown>(
     }
   }
 
-  const execute = () => {
-    void fetchData()
+  const execute = (body?: unknown) => {
+    void fetchData(body)
   }
 
   useEffect(() => {
@@ -147,7 +151,7 @@ export const useFetch = <T = unknown>(
   if (skip) {
     return {
       state: { error: undefined, data: undefined, loading: false },
-      action: () => {},
+      action: () => { },
     }
   }
 
