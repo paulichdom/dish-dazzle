@@ -1,6 +1,10 @@
 import RecipeGrid from '../../components/RecipeGrid'
-import { recipes } from '../../mocks/recipes'
+import useRecipes, { Recipe } from '../../hooks/useRecipes'
 
 export default function Recipes() {
-  return <RecipeGrid recipes={recipes} />
+  const { recipes } = useRecipes()
+
+  if (!recipes) return <p>Loading ...</p>
+
+  return <RecipeGrid recipes={recipes as Recipe[]} />
 }

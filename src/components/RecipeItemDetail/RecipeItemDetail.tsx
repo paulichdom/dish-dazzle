@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Recipe } from '../../mocks/recipes'
 import Button from '../Button'
+import { Recipe } from '../../hooks/useRecipes'
 
 export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
   const { title, dateCreated, instructions, tags } = recipe
@@ -13,8 +13,12 @@ export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
     day: 'numeric',
   })
 
-  const description =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+  const description = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+    nisi ut aliquip ex ea commodo consequat.`
+
+  // TODO: const showCTAs = authorId === accessToken;
 
   return (
     <Container>
@@ -44,7 +48,9 @@ export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
         </InstructionsContainer>
       </DetailsContainer>
       <CTAContainer>
-        <Button size='medium' variant='fill'>Test</Button>
+        <Button size="medium" variant="fill">
+          Test
+        </Button>
         <EditButton>Edit</EditButton>
         <DeleteButton>Delete</DeleteButton>
       </CTAContainer>

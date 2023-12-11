@@ -10,19 +10,6 @@ export const httpMethods = {
   OPTIONS: 'OPTIONS',
 } as const
 
-type Meta = {
-  status_code: number
-  status: string
-  message: string
-  more_info: Record<string, never>
-  errors: never[]
-}
-
-type ApiResponse<T> = {
-  meta: Meta
-  data: T
-}
-
 type State<T> = {
   data?: T
   error?: Error
@@ -50,10 +37,10 @@ export const useFetch = <T = unknown>(
     onCompleted?: () => void
     onError?: () => void
   } = {
-    method: httpMethods.GET,
-    immediate: true,
-    skip: false,
-  },
+      method: httpMethods.GET,
+      immediate: true,
+      skip: false,
+    },
 ): { state: State<T>; action: () => void } => {
   const accessToken = import.meta.env.VITE_API_ACCESS_TOKEN
 
@@ -125,11 +112,11 @@ export const useFetch = <T = unknown>(
         throw new Error(response.statusText)
       }
 
-      const apiResponse = (await response.json()) as ApiResponse<T>
-      cache.current[url] = apiResponse.data
+      const apiResponse = (await response.json()) as T
+      cache.current[url] = apiResponse
       if (cancelRequest.current) return
 
-      dispatch({ type: 'fetched', payload: apiResponse.data })
+      dispatch({ type: 'fetched', payload: apiResponse })
 
       if (onCompleted) onCompleted()
     } catch (error) {
@@ -150,7 +137,7 @@ export const useFetch = <T = unknown>(
 
     cancelRequest.current = false
 
-    if (immediate) execute()
+    if (immediate && !skip) execute()
 
     return () => {
       cancelRequest.current = true
@@ -160,7 +147,7 @@ export const useFetch = <T = unknown>(
   if (skip) {
     return {
       state: { error: undefined, data: undefined, loading: false },
-      action: () => {},
+      action: () => { },
     }
   }
 
