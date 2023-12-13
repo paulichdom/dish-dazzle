@@ -10,20 +10,27 @@ import LoadingSpinner from '../../components/LoadingSpinner'
 
 export default function Recipes() {
   const [currentPage, setCurrentPage] = useState(1)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const { recipes } = useRecipes()
 
   if (!recipes) return <LoadingSpinner message="Loading recipes ..." />
 
   const handleSearch = (query: string) => {
-    console.log('Search query:', query)
+    setSearchQuery(query)
   }
+
+  const filteredRecipes = recipes.filter((recipe: Recipe) =>
+    recipe.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  )
+
+  const hasFilteredRecipes = filteredRecipes.length > 0
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
   }
 
-  const totalPages = 10
+  const totalPages = 3
 
   return (
     <Container>
@@ -33,7 +40,13 @@ export default function Recipes() {
           <NavLink to={`/recipes/create`}>Add recipe</NavLink>
         </AddButton>
       </ActionBar>
-      <RecipeGrid recipes={recipes as Recipe[]} />
+      {hasFilteredRecipes ? (
+        <RecipeGrid recipes={filteredRecipes as Recipe[]} />
+      ) : (
+        <MessageContainer>
+          No results found for "{searchQuery}". Please try different keywords.
+        </MessageContainer>
+      )}
       <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
@@ -68,4 +81,14 @@ const AddButton = styled(BaseButton)`
 const NavLink = styled(Link)`
   color: inherit;
   text-decoration: none;
+`
+
+const MessageContainer = styled.div`
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #ffefef;
+  border: 1px solid #ffcccc;
+  border-radius: 4px;
+  color: #666;
+  text-align: center;
 `

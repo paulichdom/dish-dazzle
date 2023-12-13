@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from 'react'
+import React, { useState, ChangeEvent, useEffect, /* KeyboardEvent */ } from 'react'
 import styled from 'styled-components'
 
 type SearchInputProps = {
@@ -6,16 +6,18 @@ type SearchInputProps = {
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('');
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onSearch(inputValue);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [inputValue, onSearch]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
-  }
-
-  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      onSearch(inputValue)
-    }
   }
 
   return (
@@ -23,7 +25,6 @@ const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
       type="text"
       value={inputValue}
       onChange={handleInputChange}
-      onKeyPress={handleKeyPress}
       placeholder="Search recipes..."
     />
   )
