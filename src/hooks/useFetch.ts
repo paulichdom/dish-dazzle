@@ -37,10 +37,10 @@ export const useFetch = <T = unknown>(
     onCompleted?: () => void
     onError?: () => void
   } = {
-    method: httpMethods.GET,
-    immediate: true,
-    skip: false,
-  },
+      method: httpMethods.GET,
+      immediate: true,
+      skip: false,
+    },
 ): { state: State<T>; action: (body?: unknown) => void } => {
   const accessToken = import.meta.env.VITE_API_ACCESS_TOKEN
 
@@ -92,7 +92,6 @@ export const useFetch = <T = unknown>(
   const fetchData = async (body?: unknown) => {
     dispatch({ type: 'loading' })
 
-    //const hasBody = ['POST', 'PUT', 'PATCH'].includes(method);
     const formattedBody = body ? JSON.stringify(body) : undefined
 
     const options: RequestInit = {
@@ -151,7 +150,7 @@ export const useFetch = <T = unknown>(
   if (skip) {
     return {
       state: { error: undefined, data: undefined, loading: false },
-      action: () => {},
+      action: () => { },
     }
   }
 

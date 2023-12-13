@@ -6,13 +6,14 @@ import Search from '../../components/Search'
 import Pagination from '../../components/Pagination'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import LoadingSpinner from '../../components/LoadingSpinner'
 
 export default function Recipes() {
   const [currentPage, setCurrentPage] = useState(1)
 
   const { recipes } = useRecipes()
 
-  if (!recipes) return <p>Loading ...</p>
+  if (!recipes) return <LoadingSpinner message='Loading recipes ...' />
 
   const handleSearch = (query: string) => {
     console.log('Search query:', query)

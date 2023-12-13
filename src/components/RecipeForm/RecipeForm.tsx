@@ -4,8 +4,11 @@ import { Recipe } from '../../hooks/useRecipes'
 import { XCircle } from 'react-feather'
 import { BaseButton } from '../Layout'
 import { useAuth } from '../../auth/AuthContext'
+import LoadingSpinner from '../LoadingSpinner'
 
 export type RecipeWithoutId = Omit<Recipe, 'id'>
+
+export type SaveRecipeData = { recipe: RecipeWithoutId }
 
 export type UpdateRecipeData = {
   recipeId: string
@@ -15,9 +18,10 @@ export type UpdateRecipeData = {
 type ModalProps = {
   recipe?: Recipe
   isEditMode: boolean
-  onSave?: (recipe: { recipe: RecipeWithoutId }) => void
-  onUpdate?: (recipe: { recipe: UpdateRecipeData }) => void
+  onSave?: (recipe: SaveRecipeData) => void
+  onUpdate?: (recipe: UpdateRecipeData) => void
   onCancel: () => void
+  loading: boolean
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -26,6 +30,7 @@ const Modal: React.FC<ModalProps> = ({
   onSave,
   onUpdate,
   onCancel,
+  loading
 }) => {
   const { accessToken: authorId } = useAuth()
 
@@ -74,10 +79,8 @@ const Modal: React.FC<ModalProps> = ({
     if (onUpdate && recipe) {
       const { id, ...valuesToUpdate } = recipe
       onUpdate({
-        recipe: {
-          recipeId: id,
-          recipe: { ...valuesToUpdate, title, instructions, tags },
-        },
+        recipeId: id,
+        recipe: { ...valuesToUpdate, title, instructions, tags },
       })
     } else if (onSave) {
       onSave({
@@ -91,6 +94,9 @@ const Modal: React.FC<ModalProps> = ({
       })
     }
   }
+
+  if (loading) return <LoadingSpinner message='Saving recipe ...' />
+  if (loading && isEditMode) return <LoadingSpinner message='Updating recipe ...' />
 
   return (
     <ModalContainer>

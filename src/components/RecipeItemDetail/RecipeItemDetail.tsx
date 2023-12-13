@@ -3,8 +3,9 @@ import { Recipe } from '../../hooks/useRecipes'
 import { BaseButton } from '../Layout'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
+import LoadingSpinner from '../LoadingSpinner'
 
-export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
+export default function RecipeItemDetail({ recipe, onDelete, loading }: { recipe: Recipe, onDelete: () => void, loading: boolean }) {
   const { accessToken } = useAuth()
   const { id, title, dateCreated, instructions, tags, authorId } = recipe
 
@@ -22,6 +23,8 @@ export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
     nisi ut aliquip ex ea commodo consequat.`
 
   const showCTAs = authorId === accessToken
+
+  if (loading) return <LoadingSpinner message='Deleting recipe ...' />
 
   return (
     <Container>
@@ -57,7 +60,7 @@ export default function RecipeItemDetail({ recipe }: { recipe: Recipe }) {
               Edit
             </NavLink>
           </EditButton>
-          <DeleteButton>Delete</DeleteButton>
+          <DeleteButton onClick={onDelete}>Delete</DeleteButton>
         </CTAContainer>
       )}
     </Container>

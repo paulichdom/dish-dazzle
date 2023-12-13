@@ -1,16 +1,16 @@
 import { useNavigate } from 'react-router-dom'
-import RecipeForm, { RecipeWithoutId } from '../../components/RecipeForm'
-import useSaveRecipe from '../../hooks/useSaveRecipe'
+import RecipeForm, { SaveRecipeData } from '../../components/RecipeForm'
+import useModifyRecipe from '../../hooks/useModifyRecipe'
 
 export default function CreateRecipe() {
-  const { saveRecipe } = useSaveRecipe()
+  const { saveRecipe, loading: saveLoading } = useModifyRecipe('add')
   const navigator = useNavigate()
 
   const handleCancel = () => {
     navigator('/recipes')
   }
 
-  const handleSave = (recipe: { recipe: RecipeWithoutId }) => {
+  const handleSave = (recipe: SaveRecipeData) => {
     saveRecipe(recipe)
   }
 
@@ -19,6 +19,7 @@ export default function CreateRecipe() {
       isEditMode={false}
       onCancel={handleCancel}
       onSave={handleSave}
+      loading={saveLoading}
     />
   )
 }
