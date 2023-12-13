@@ -1,9 +1,9 @@
 // PageOverlayLoader.tsx
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
 
 interface LoadingSpinnerProps {
-  message?: string;
+  message?: string
 }
 
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ message }) => {
@@ -12,8 +12,8 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ message }) => {
       <Spinner />
       {message && <Message>{message}</Message>}
     </Loader>
-  );
-};
+  )
+}
 
 const rotate = keyframes`
   from {
@@ -22,7 +22,7 @@ const rotate = keyframes`
   to {
     transform: rotate(360deg);
   }
-`;
+`
 
 const Loader = styled.div`
   position: fixed;
@@ -33,7 +33,7 @@ const Loader = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`;
+`
 
 const Spinner = styled.div`
   border: 5px solid #f3f3f3;
@@ -42,12 +42,12 @@ const Spinner = styled.div`
   width: 50px;
   height: 50px;
   animation: ${rotate} 2s linear infinite;
-`;
+`
 
 const Message = styled.div`
   margin-top: 10px;
   font-size: 1rem;
   color: #333;
-`;
+`
 
-export default LoadingSpinner;
+export default LoadingSpinner

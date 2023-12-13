@@ -7,14 +7,17 @@ export default function EditRecipe() {
   const { state } = useLocation()
 
   const { recipe } = state
-  const { editRecipe, loading: updateLoading } = useModifyRecipe('edit', recipe.id);
+  const { editRecipe, loading: updateLoading } = useModifyRecipe(
+    'edit',
+    recipe.id,
+  )
 
   const handleCancel = () => {
     navigator(`/recipes/${recipe.id}`)
   }
 
   const handleUpdate = (recipe: UpdateRecipeData) => {
-    editRecipe(recipe);
+    editRecipe(recipe)
   }
 
   return (

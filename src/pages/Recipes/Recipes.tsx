@@ -13,7 +13,7 @@ export default function Recipes() {
 
   const { recipes } = useRecipes()
 
-  if (!recipes) return <LoadingSpinner message='Loading recipes ...' />
+  if (!recipes) return <LoadingSpinner message="Loading recipes ..." />
 
   const handleSearch = (query: string) => {
     console.log('Search query:', query)

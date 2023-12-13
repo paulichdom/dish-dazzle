@@ -5,7 +5,15 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
 import LoadingSpinner from '../LoadingSpinner'
 
-export default function RecipeItemDetail({ recipe, onDelete, loading }: { recipe: Recipe, onDelete: () => void, loading: boolean }) {
+export default function RecipeItemDetail({
+  recipe,
+  onDelete,
+  loading,
+}: {
+  recipe: Recipe
+  onDelete: () => void
+  loading: boolean
+}) {
   const { accessToken } = useAuth()
   const { id, title, dateCreated, instructions, tags, authorId } = recipe
 
@@ -24,7 +32,7 @@ export default function RecipeItemDetail({ recipe, onDelete, loading }: { recipe
 
   const showCTAs = authorId === accessToken
 
-  if (loading) return <LoadingSpinner message='Deleting recipe ...' />
+  if (loading) return <LoadingSpinner message="Deleting recipe ..." />
 
   return (
     <Container>

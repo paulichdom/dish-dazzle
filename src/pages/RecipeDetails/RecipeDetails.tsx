@@ -9,13 +9,22 @@ export default function RecipeDetails() {
 
   const { recipe } = useRecipes(params?.id)
 
-  const { deleteRecipe, loading: deleteLoading } = useModifyRecipe('delete', params.id)
+  const { deleteRecipe, loading: deleteLoading } = useModifyRecipe(
+    'delete',
+    params.id,
+  )
 
   const handleDelete = () => {
     deleteRecipe()
   }
 
-  if (!recipe) return <LoadingSpinner message='Loading recipe ...' />
+  if (!recipe) return <LoadingSpinner message="Loading recipe ..." />
 
-  return <RecipeItemDetail recipe={recipe as Recipe} onDelete={handleDelete} loading={deleteLoading} />
+  return (
+    <RecipeItemDetail
+      recipe={recipe as Recipe}
+      onDelete={handleDelete}
+      loading={deleteLoading}
+    />
+  )
 }

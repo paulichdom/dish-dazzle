@@ -30,7 +30,7 @@ const Modal: React.FC<ModalProps> = ({
   onSave,
   onUpdate,
   onCancel,
-  loading
+  loading,
 }) => {
   const { accessToken: authorId } = useAuth()
 
@@ -95,8 +95,9 @@ const Modal: React.FC<ModalProps> = ({
     }
   }
 
-  if (loading) return <LoadingSpinner message='Saving recipe ...' />
-  if (loading && isEditMode) return <LoadingSpinner message='Updating recipe ...' />
+  if (loading) return <LoadingSpinner message="Saving recipe ..." />
+  if (loading && isEditMode)
+    return <LoadingSpinner message="Updating recipe ..." />
 
   return (
     <ModalContainer>
