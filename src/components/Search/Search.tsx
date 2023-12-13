@@ -1,15 +1,11 @@
-import React, {
-  useState,
-  ChangeEvent,
-  useEffect /* KeyboardEvent */,
-} from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import styled from 'styled-components'
 
 type SearchInputProps = {
   onSearch: (query: string) => void
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
+export default function SearchInput({ onSearch }: SearchInputProps) {
   const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
@@ -40,5 +36,3 @@ const StyledInput = styled.input`
   border-radius: 4px;
   width: 320px;
 `
-
-export default SearchInput

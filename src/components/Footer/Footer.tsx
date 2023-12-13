@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Footer = () => {
+export default function Footer() {
   return (
     <StyledFooter>
       <ContentWrapper>
@@ -11,8 +11,6 @@ const Footer = () => {
     </StyledFooter>
   )
 }
-
-export default Footer
 
 const StyledFooter = styled.footer`
   padding: 32px;

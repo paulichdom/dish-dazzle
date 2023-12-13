@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import RecipeForm, { UpdateRecipeData } from '../../components/RecipeForm'
 import useModifyRecipe from '../../hooks/useModifyRecipe'
+import RecipeForm, { UpdateRecipeData } from '../../components/RecipeForm'
 
 export default function EditRecipe() {
   const navigator = useNavigate()

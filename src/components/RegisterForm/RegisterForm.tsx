@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { useAuth } from '../../auth/AuthContext'
-import { FormEvent } from 'react'
-import { CheckCircle, Circle } from 'react-feather'
+import React, { useState, FormEvent } from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { CheckCircle, Circle } from 'react-feather'
+import { useAuth } from '../../auth/AuthContext'
 
-export default function SignupForm() {
+export default function RegisterForm() {
   const initialErrors = [
     { message: 'At least one lowercase letter.', isValid: false },
     { message: 'One uppercase letter.', isValid: false },

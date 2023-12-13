@@ -1,16 +1,16 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
+import { AuthProvider } from '../../auth/AuthContext'
 import Login from '../../pages/Login'
 import Register from '../../pages/Register'
 import Recipes from '../../pages/Recipes/Recipes'
 import RecipeDetails from '../../pages/RecipeDetails'
 import Error from '../../pages/Error'
-import { AuthProvider } from '../../auth/AuthContext'
 import ProtectedRoute from '../ProtectedRoute'
 import PageLayout from '../PageLayout'
 import AuthRoute from '../AuthRoute'
 import CreateRecipe from '../../pages/CreateRecipe'
 import EditRecipe from '../../pages/EditRecipe'
-import { Toaster } from 'react-hot-toast'
 
 export default function App() {
   return (

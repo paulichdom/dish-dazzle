@@ -5,10 +5,10 @@ import {
   useContext,
   useState,
 } from 'react'
-import { httpMethods } from '../hooks/useFetch'
 import { useNavigate } from 'react-router-dom'
-import useLocalStorage from '../hooks/useLocalStorage'
 import toast from 'react-hot-toast'
+import { httpMethods } from '../hooks/useFetch'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 type AuthContextValue = {
   accessToken: string | null
@@ -59,7 +59,6 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.appUserId) {
-          // TODO: Show success msg
           navigator('/login')
           toast.success('Successfully registered! Please log in to continue')
         }

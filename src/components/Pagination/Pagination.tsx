@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 
 type PaginationProps = {
@@ -7,11 +6,11 @@ type PaginationProps = {
   onPageChange: (page: number) => void
 }
 
-const Pagination: React.FC<PaginationProps> = ({
+export default function Pagination({
   totalPages,
   currentPage,
   onPageChange,
-}) => {
+}: PaginationProps) {
   const pageNumbers = []
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i)
@@ -52,5 +51,3 @@ const PageNumber = styled.button<{ isActive: boolean }>`
     color: #fff;
   }
 `
-
-export default Pagination

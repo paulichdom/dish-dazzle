@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
-import RecipeItemDetail from '../../components/RecipeItemDetail'
 import useRecipes, { Recipe } from '../../hooks/useRecipes'
 import useModifyRecipe from '../../hooks/useModifyRecipe'
+import RecipeItemDetail from '../../components/RecipeItemDetail'
 import LoadingSpinner from '../../components/LoadingSpinner'
 
 export default function RecipeDetails() {

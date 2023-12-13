@@ -1,12 +1,10 @@
-// PageOverlayLoader.tsx
-import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
-interface LoadingSpinnerProps {
+type LoadingSpinnerProps = {
   message?: string
 }
 
-const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ message }) => {
+export default function LoadingSpinner({ message }: LoadingSpinnerProps) {
   return (
     <Loader>
       <Spinner />
@@ -49,5 +47,3 @@ const Message = styled.div`
   font-size: 1rem;
   color: #333;
 `
-
-export default LoadingSpinner

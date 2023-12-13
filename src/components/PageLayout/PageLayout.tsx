@@ -1,8 +1,8 @@
 import { Fragment } from 'react'
+import { useOutlet } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from '../Header'
 import Footer from '../Footer'
-import { useOutlet } from 'react-router-dom'
 
 export default function PageLayout() {
   const outlet = useOutlet()

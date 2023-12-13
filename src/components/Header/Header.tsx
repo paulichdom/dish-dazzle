@@ -1,9 +1,9 @@
-import styled from 'styled-components'
-import { Row } from '../Layout'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 import { useAuth } from '../../auth/AuthContext'
+import { Row } from '../Layout'
 
-const Header = () => {
+export default function Header() {
   const { logout } = useAuth()
   return (
     <HeaderContainer>
@@ -20,8 +20,6 @@ const Header = () => {
     </HeaderContainer>
   )
 }
-
-export default Header
 
 const HeaderContainer = styled.header`
   width: 100%;

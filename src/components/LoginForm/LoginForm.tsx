@@ -1,7 +1,7 @@
-import styled from 'styled-components'
-import { useAuth } from '../../auth/AuthContext'
 import { FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { useAuth } from '../../auth/AuthContext'
 
 export default function LoginForm() {
   const [email, setEmail] = useState('')

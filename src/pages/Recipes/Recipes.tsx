@@ -1,11 +1,11 @@
-import styled from 'styled-components'
-import { BaseButton, Column, Row } from '../../components/Layout'
-import RecipeGrid from '../../components/RecipeGrid'
-import useRecipes, { Recipe } from '../../hooks/useRecipes'
-import Search from '../../components/Search'
-import Pagination from '../../components/Pagination'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import useRecipes, { Recipe } from '../../hooks/useRecipes'
+import { BaseButton, Column, Row } from '../../components/Layout'
+import RecipeGrid from '../../components/RecipeGrid'
+import Search from '../../components/Search'
+import Pagination from '../../components/Pagination'
 import LoadingSpinner from '../../components/LoadingSpinner'
 
 export default function Recipes() {

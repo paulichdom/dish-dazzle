@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Recipe } from '../../hooks/useRecipes'
 import { XCircle } from 'react-feather'
-import { BaseButton } from '../Layout'
+import { Recipe } from '../../hooks/useRecipes'
 import { useAuth } from '../../auth/AuthContext'
+import { BaseButton } from '../Layout'
 import LoadingSpinner from '../LoadingSpinner'
 
 export type RecipeWithoutId = Omit<Recipe, 'id'>
@@ -15,7 +15,7 @@ export type UpdateRecipeData = {
   recipe: RecipeWithoutId
 }
 
-type ModalProps = {
+type RecipeFormProps = {
   recipe?: Recipe
   isEditMode: boolean
   onSave?: (recipe: SaveRecipeData) => void
@@ -24,14 +24,14 @@ type ModalProps = {
   loading: boolean
 }
 
-const Modal: React.FC<ModalProps> = ({
+export default function RecipeForm({
   recipe,
   isEditMode,
   onSave,
   onUpdate,
   onCancel,
   loading,
-}) => {
+}: RecipeFormProps) {
   const { accessToken: authorId } = useAuth()
 
   const [title, setTitle] = useState('')
@@ -103,8 +103,8 @@ const Modal: React.FC<ModalProps> = ({
     )
 
   return (
-    <ModalContainer>
-      <ModalHeader>{isEditMode ? 'Edit Recipe' : 'Create Recipe'}</ModalHeader>
+    <Container>
+      <Header>{isEditMode ? 'Edit Recipe' : 'Create Recipe'}</Header>
       <div>
         <label>Title:</label>
         <Input
@@ -153,11 +153,11 @@ const Modal: React.FC<ModalProps> = ({
         </Button>
         <Button onClick={onCancel}>Cancel</Button>
       </CTAContainer>
-    </ModalContainer>
+    </Container>
   )
 }
 
-const ModalContainer = styled.div`
+const Container = styled.div`
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -166,7 +166,7 @@ const ModalContainer = styled.div`
   margin: 40px auto;
 `
 
-const ModalHeader = styled.h3`
+const Header = styled.h3`
   margin-bottom: 20px;
   color: #333;
 `
@@ -217,5 +217,3 @@ const CTAContainer = styled.div`
   flex-direction: row-reverse;
   gap: 16px;
 `
-
-export default Modal
