@@ -8,6 +8,7 @@ import {
 import { httpMethods } from '../hooks/useFetch'
 import { useNavigate } from 'react-router-dom'
 import useLocalStorage from '../hooks/useLocalStorage'
+import toast from 'react-hot-toast'
 
 type AuthContextValue = {
   accessToken: string | null
@@ -60,10 +61,12 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
         if (data.appUserId) {
           // TODO: Show success msg
           navigator('/login')
+          toast.success('Successfully registered! Please log in to continue')
         }
       })
       .catch((error) => {
         console.error('Error:', error)
+        toast.error('Error while registering')
       })
       .finally(() => setIsLoading(false))
   }
@@ -89,15 +92,18 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
         const token = data.appUser.id ?? null
         setAccessToken(token)
         navigator('/recipes')
+        toast.success('Login successful!')
       })
       .catch((error) => {
         console.error('Error:', error)
+        toast.error('Invalid username or password')
       })
       .finally(() => setIsLoading(false))
   }
 
   const logout = () => {
     setAccessToken(null)
+    toast.success("You're logged out")
   }
 
   const value = {

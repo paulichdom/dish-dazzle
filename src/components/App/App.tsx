@@ -10,6 +10,7 @@ import PageLayout from '../PageLayout'
 import AuthRoute from '../AuthRoute'
 import CreateRecipe from '../../pages/CreateRecipe'
 import EditRecipe from '../../pages/EditRecipe'
+import { Toaster } from 'react-hot-toast'
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>
+        <Toaster />
       </AuthProvider>
     </BrowserRouter>
   )

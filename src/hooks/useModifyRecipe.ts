@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { SaveRecipeData, UpdateRecipeData } from '../components/RecipeForm'
 import { httpMethods, useFetch } from './useFetch'
+import toast from 'react-hot-toast'
 
 const API_PATHS = {
   ADD_RECIPE: 'https://addrecipe-zazjbx7nka-uc.a.run.app/',
@@ -34,7 +35,10 @@ export default function useModifyRecipe(
   }>(API_PATHS.ADD_RECIPE, {
     method: httpMethods.POST,
     immediate: false,
-    onCompleted: () => navigator('/recipes'),
+    onCompleted: () => {
+      navigator('/recipes')
+      toast.success('Recipe successfully added!')
+    },
     skip: method !== 'add',
   })
 
@@ -47,6 +51,7 @@ export default function useModifyRecipe(
     immediate: false,
     onCompleted: () => {
       if (recipeId) navigator(`/recipes/${recipeId}`)
+      toast.success('Recipe successfully updated!')
     },
     skip: method !== 'edit',
   })
@@ -61,7 +66,10 @@ export default function useModifyRecipe(
     },
     method: httpMethods.DELETE,
     immediate: false,
-    onCompleted: () => navigator('/recipes'),
+    onCompleted: () => {
+      navigator('/recipes')
+      toast.success('Recipe successfully deleted!')
+    },
     skip: method !== 'delete',
   })
 
