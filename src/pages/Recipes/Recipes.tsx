@@ -17,20 +17,25 @@ export default function Recipes() {
   if (!recipes) return <LoadingSpinner message="Loading recipes ..." />
 
   const handleSearch = (query: string) => {
-    setSearchQuery(query)
+    setSearchQuery(query);
+    if (query !== searchQuery) setCurrentPage(1);
   }
 
+  const recipesPerPage = 9;
   const filteredRecipes = recipes.filter((recipe: Recipe) =>
     recipe.title.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
-  const hasFilteredRecipes = filteredRecipes.length > 0
+  const indexOfLastRecipe = currentPage * recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  const currentRecipes = filteredRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  const hasCurrentRecipes = currentRecipes.length > 0
+
+  const totalPages = Math.ceil(filteredRecipes.length / recipesPerPage);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
   }
-
-  const totalPages = 3
 
   return (
     <Container>
@@ -40,8 +45,8 @@ export default function Recipes() {
           <NavLink to={`/recipes/create`}>Add recipe</NavLink>
         </AddButton>
       </ActionBar>
-      {hasFilteredRecipes ? (
-        <RecipeGrid recipes={filteredRecipes as Recipe[]} />
+      {hasCurrentRecipes ? (
+        <RecipeGrid recipes={currentRecipes as Recipe[]} />
       ) : (
         <MessageContainer>
           No results found for "{searchQuery}". Please try different keywords.
