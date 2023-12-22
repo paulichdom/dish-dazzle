@@ -17,8 +17,8 @@ export const Row = styled.div`
 export const BaseButton = styled.button`
   background-color: #fff;
   color: #333;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border: 1px solid #333;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
 `

@@ -33,6 +33,6 @@ export default function SearchInput({ onSearch }: SearchInputProps) {
 const StyledInput = styled.input`
   padding: 10px 15px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   width: 320px;
 `

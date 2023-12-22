@@ -7,10 +7,13 @@ import RecipeGrid from '../../components/RecipeGrid'
 import Search from '../../components/Search'
 import Pagination from '../../components/Pagination'
 import LoadingSpinner from '../../components/LoadingSpinner'
+import RecipeList from '../../components/RecipeList'
+import { Grid, List, Plus } from 'react-feather'
 
 export default function Recipes() {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
+  const [showList, setShowList] = useState(false)
 
   const { recipes } = useRecipes()
 
@@ -44,12 +47,21 @@ export default function Recipes() {
     <Container>
       <ActionBar>
         <Search onSearch={handleSearch} />
+        <ToggleListBtn onClick={() => setShowList((prevValue) => !prevValue)}>
+          {showList ? <Grid /> : <List />}
+        </ToggleListBtn>
         <AddButton>
-          <NavLink to={`/recipes/create`}>Add recipe</NavLink>
+          <NavLink to={`/recipes/create`}>
+            <Plus />
+          </NavLink>
         </AddButton>
       </ActionBar>
       {hasCurrentRecipes ? (
-        <RecipeGrid recipes={currentRecipes as Recipe[]} />
+        showList ? (
+          <RecipeList recipes={currentRecipes as Recipe[]} />
+        ) : (
+          <RecipeGrid recipes={currentRecipes as Recipe[]} />
+        )
       ) : (
         <MessageContainer>
           No results found for "{searchQuery}". Please try different keywords.
@@ -71,20 +83,29 @@ const Container = styled(Column)`
 const ActionBar = styled(Row)`
   gap: 16px;
   justify-content: flex-end;
-  align-items: baseline;
 `
 
 const AddButton = styled(BaseButton)`
-  color: #4285f4;
-  border-color: #4285f4;
+  color: #9aa0a6;
+  border: 1px solid #9aa0a6;
+  background-color: white;
   max-height: 46px;
+  transition: all 0.3s ease;
 
   &:hover {
-    color: #357ae8;
-    border-color: #789fde;
-    background-color: #e8f4f8;
+    color: #5f6368;
+    border-color: #5f6368;
+    background-color: #f8f9fa;
+  }
+
+  &:active {
+    color: #202124;
+    border-color: #202124;
+    background-color: #e8eaed;
   }
 `
+
+const ToggleListBtn = styled(AddButton)``
 
 const NavLink = styled(Link)`
   color: inherit;

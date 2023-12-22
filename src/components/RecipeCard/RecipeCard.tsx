@@ -49,11 +49,17 @@ const CardImage = styled.img`
 
 const CardContent = styled.div`
   padding: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const RecipeName = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const TagsContainer = styled.div`
