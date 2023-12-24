@@ -29,7 +29,12 @@ export default function RecipeListItem({
         ))}
       </Section>
       <ButtonContainer>
-        <MoreButton>
+        <MoreButton
+          onClick={(event) => {
+            event.preventDefault()
+            console.log('More button')
+          }}
+        >
           <MoreHorizontal />
         </MoreButton>
       </ButtonContainer>

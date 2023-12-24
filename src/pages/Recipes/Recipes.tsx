@@ -8,14 +8,17 @@ import Search from '../../components/Search'
 import Pagination from '../../components/Pagination'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import RecipeList from '../../components/RecipeList'
-import { Grid, List, Plus } from 'react-feather'
+import { Filter, Grid, List, Plus } from 'react-feather'
+import { useAuth } from '../../auth/AuthContext'
 
 export default function Recipes() {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
   const [showList, setShowList] = useState(false)
+  const [showMyRecipes, setShowMyRecipes] = useState(false)
 
   const { recipes } = useRecipes()
+  const { accessToken } = useAuth()
 
   if (!recipes) return <LoadingSpinner message="Loading recipes ..." />
 
@@ -24,8 +27,16 @@ export default function Recipes() {
     if (query !== searchQuery) setCurrentPage(1)
   }
 
+  console.log({ recipes, accessToken })
+
   const recipesPerPage = 9
-  const filteredRecipes = recipes.filter((recipe: Recipe) =>
+
+  const myRecipes = recipes.filter((recipe) => {
+    if (showMyRecipes) return recipe.authorId === accessToken
+    return true
+  })
+
+  const filteredRecipes = myRecipes.filter((recipe: Recipe) =>
     recipe.title.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
@@ -47,14 +58,19 @@ export default function Recipes() {
     <Container>
       <ActionBar>
         <Search onSearch={handleSearch} />
-        <ToggleListBtn onClick={() => setShowList((prevValue) => !prevValue)}>
+        <ActionBarButton
+          onClick={() => setShowMyRecipes((prevValue) => !prevValue)}
+        >
+          <Filter />
+        </ActionBarButton>
+        <ActionBarButton onClick={() => setShowList((prevValue) => !prevValue)}>
           {showList ? <Grid /> : <List />}
-        </ToggleListBtn>
-        <AddButton>
+        </ActionBarButton>
+        <ActionBarButton>
           <NavLink to={`/recipes/create`}>
             <Plus />
           </NavLink>
-        </AddButton>
+        </ActionBarButton>
       </ActionBar>
       {hasCurrentRecipes ? (
         showList ? (
@@ -85,7 +101,7 @@ const ActionBar = styled(Row)`
   justify-content: flex-end;
 `
 
-const AddButton = styled(BaseButton)`
+const ActionBarButton = styled(BaseButton)`
   color: #9aa0a6;
   border: 1px solid #9aa0a6;
   background-color: white;
@@ -104,8 +120,6 @@ const AddButton = styled(BaseButton)`
     background-color: #e8eaed;
   }
 `
-
-const ToggleListBtn = styled(AddButton)``
 
 const NavLink = styled(Link)`
   color: inherit;

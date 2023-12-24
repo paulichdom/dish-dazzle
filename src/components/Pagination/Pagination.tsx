@@ -21,7 +21,7 @@ export default function Pagination({
       {pageNumbers.map((number) => (
         <PageNumber
           key={number}
-          isActive={number === currentPage}
+          $isActive={number === currentPage}
           onClick={() => onPageChange(number)}
         >
           {number}
@@ -38,12 +38,12 @@ const PaginationContainer = styled.div`
   margin-top: 20px;
 `
 
-const PageNumber = styled.button<{ isActive: boolean }>`
+const PageNumber = styled.button<{ $isActive: boolean }>`
   padding: 5px 10px;
   margin: 0 5px;
   border: none;
-  background-color: ${(props) => (props.isActive ? '#007bff' : '#fff')};
-  color: ${(props) => (props.isActive ? '#fff' : '#000')};
+  background-color: ${(props) => (props.$isActive ? '#007bff' : '#fff')};
+  color: ${(props) => (props.$isActive ? '#fff' : '#000')};
   cursor: pointer;
 
   &:hover {
