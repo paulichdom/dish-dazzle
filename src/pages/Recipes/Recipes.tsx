@@ -27,8 +27,6 @@ export default function Recipes() {
     if (query !== searchQuery) setCurrentPage(1)
   }
 
-  console.log({ recipes, accessToken })
-
   const recipesPerPage = 9
 
   const myRecipes = recipes.filter((recipe) => {
@@ -56,10 +54,12 @@ export default function Recipes() {
     setCurrentPage(page)
   }
 
+  const isSearchDisabled = !hasCurrentRecipes && !searchQuery
+
   return (
     <Container>
       <ActionBar>
-        <Search onSearch={handleSearch} isDisabled={!hasCurrentRecipes} />
+        <Search onSearch={handleSearch} isDisabled={isSearchDisabled} />
         <ActionBarButton
           onClick={() => setShowMyRecipes((prevValue) => !prevValue)}
         >

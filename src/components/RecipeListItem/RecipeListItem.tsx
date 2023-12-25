@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { BaseButton, Row } from '../Layout'
 import { Recipe } from '../../hooks/useRecipes'
 import { Calendar, MoreHorizontal, Tag as TagIcon } from 'react-feather'
+import toast from 'react-hot-toast'
 
 type RecipeListItemProps = {
   recipe: Recipe
@@ -32,7 +33,7 @@ export default function RecipeListItem({
         <MoreButton
           onClick={(event) => {
             event.preventDefault()
-            console.log('More button')
+            toast.success('New feature comming soon ...')
           }}
         >
           <MoreHorizontal />
