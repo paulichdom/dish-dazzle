@@ -36,6 +36,8 @@ export default function Recipes() {
     return true
   })
 
+  const hasMyRecipes = myRecipes.length > 0
+
   const filteredRecipes = myRecipes.filter((recipe: Recipe) =>
     recipe.title.toLowerCase().includes(searchQuery.toLowerCase()),
   )
@@ -57,7 +59,7 @@ export default function Recipes() {
   return (
     <Container>
       <ActionBar>
-        <Search onSearch={handleSearch} />
+        <Search onSearch={handleSearch} isDisabled={!hasCurrentRecipes} />
         <ActionBarButton
           onClick={() => setShowMyRecipes((prevValue) => !prevValue)}
         >
@@ -80,7 +82,16 @@ export default function Recipes() {
         )
       ) : (
         <MessageContainer>
-          No results found for "{searchQuery}". Please try different keywords.
+          {hasMyRecipes ? (
+            `No results found for ${searchQuery}. Please try different keywords.`
+          ) : (
+            <>
+              It looks like you haven't added any recipes yet!{' '}
+              <CreateRecipeLink to={`/recipes/create`}>
+                Start creating your culinary collection now.
+              </CreateRecipeLink>
+            </>
+          )}
         </MessageContainer>
       )}
       <Pagination
@@ -126,12 +137,16 @@ const NavLink = styled(Link)`
   text-decoration: none;
 `
 
+const CreateRecipeLink = styled(Link)`
+  color: inherit;
+`
+
 const MessageContainer = styled.div`
   padding: 20px;
   margin-top: 20px;
-  background-color: #ffefef;
-  border: 1px solid #ffcccc;
-  border-radius: 4px;
-  color: #666;
+  background-color: #f9f5f1;
+  border: 1px solid #e6e0db;
+  border-radius: 6px;
+  color: #333;
   text-align: center;
 `

@@ -3,9 +3,13 @@ import styled from 'styled-components'
 
 type SearchInputProps = {
   onSearch: (query: string) => void
+  isDisabled: boolean
 }
 
-export default function SearchInput({ onSearch }: SearchInputProps) {
+export default function SearchInput({
+  onSearch,
+  isDisabled,
+}: SearchInputProps) {
   const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
@@ -26,6 +30,7 @@ export default function SearchInput({ onSearch }: SearchInputProps) {
       value={inputValue}
       onChange={handleInputChange}
       placeholder="Search recipes..."
+      disabled={isDisabled}
     />
   )
 }
